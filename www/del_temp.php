@@ -10,11 +10,15 @@ function recursive_remove_directory($directory, $empty = FALSE)
     } elseif (is_readable($directory)) {
         $handle = opendir($directory);
         while (FALSE !== ($item = readdir($handle))) {
+            if ( $item == '.gitignore') {
+                continue;
+            }
             if ($item != '.' && $item != '..') {
                 $path = $directory . '/' . $item;
                 if (is_dir($path)) {
                     recursive_remove_directory($path);
                 } else {
+
                     unlink($path);
                 }
             }
@@ -26,10 +30,16 @@ function recursive_remove_directory($directory, $empty = FALSE)
             }
         }
     }
-    return TRUE;
+    echo '<div style="text-align:center;">
+
+            TEMP je smazan.
+
+
+   </div>';
 }
 
+try {
+    $directory = dirname(__DIR__) . '/temp/';
 
-$directory = dirname(__DIR__).'/temp/';
-
-recursive_remove_directory($directory,true);
+    recursive_remove_directory($directory, true);
+} catch (Exception $e) {}
