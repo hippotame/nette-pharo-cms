@@ -1,13 +1,9 @@
 <?php
-namespace App\CommonModule\Presenters;
+namespace App\ForumModule\Presenters;
 
 use Nette;
-;
+use App\CommonModule\Presenters\CommonPresenter;
 
-class CommonPresenter extends Nette\Application\UI\Presenter
+class BasePresenter extends CommonPresenter
 {
-
-    protected $em;
-
-    
 }

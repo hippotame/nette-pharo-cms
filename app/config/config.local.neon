@@ -1,5 +1,5 @@
 parameters:
-
+	templateName: pharocom
 
 database:
 	dsn: 'mysql:host=127.0.0.1;dbname=test'
