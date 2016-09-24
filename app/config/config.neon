@@ -12,8 +12,8 @@ parameters:
         https: false
         log_level: NOTICE
 doctrine:
-    user: root
-    password: hippo
+    user: cms
+    password: cms
     dbname: pharo_cms
     metadata:
         App: %appDir%

@@ -2,17 +2,21 @@
 namespace App\CommonModule\Presenters;
 
 use Nette;
-;
 
 class CommonPresenter extends Nette\Application\UI\Presenter
 {
 
-    /**
-     * @inject @var \Kdyby\Doctrine\EntityManager
-     */
-    public $em;
+    protected $db;
+
+    public $useAnalytics = false;
 
     private $templateName = 'pharocom';
+
+    public function __construct(Nette\Database\Context $database)
+    {
+        parent::__construct($database);
+        $this->db = $database;
+    }
 
     public function formatLayoutTemplateFiles()
     {
@@ -61,10 +65,11 @@ class CommonPresenter extends Nette\Application\UI\Presenter
 
     private function setTemplateName()
     {
-
+        $this->template->useAnalytics = $this->useAnalytics;
         // using the templateName from neon config name
         $templateName = $this->context->getParameters()['templateName'];
         $this->templateName = $templateName;
+        $this->template->baseThemePath = '/themes/_data/';
 
         // getting the template name from the default database in table templates
         // $context = $this->context->getService('database.default.context');

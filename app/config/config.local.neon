@@ -2,8 +2,8 @@ parameters:
 	templateName: pharocom
 
 database:
-	dsn: 'mysql:host=127.0.0.1;dbname=test'
-	user:
-	password:
+	dsn: 'mysql:host=127.0.0.1;dbname=pharo_cms'
+	user: cms
+	password: cms
 	options:
 		lazy: yes
