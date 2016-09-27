@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "85f7b4d3eb03c2852cb464e9f3da9156",
-    "content-hash": "2cf6f9b6cca84966394d347f4e3a30f0",
+    "hash": "d2ad20981d09db0039c3f294cbc0edba",
+    "content-hash": "5dea537b501c9f431c4287424e14190a",
     "packages": [
         {
             "name": "dg/adminer-custom",
