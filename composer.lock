@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d2ad20981d09db0039c3f294cbc0edba",
+    "hash": "4b93c633483476f539f91a720875ddeb",
     "content-hash": "5dea537b501c9f431c4287424e14190a",
     "packages": [
         {
@@ -1605,16 +1605,16 @@
         },
         {
             "name": "nette/forms",
-            "version": "v2.3.10",
+            "version": "v2.3.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/forms.git",
-                "reference": "22ab1e9794fabe225b980ee4c31f57ee5b7f74e2"
+                "reference": "d7135330459168fc34ee6c5db1661d335b76cbb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/forms/zipball/22ab1e9794fabe225b980ee4c31f57ee5b7f74e2",
-                "reference": "22ab1e9794fabe225b980ee4c31f57ee5b7f74e2",
+                "url": "https://api.github.com/repos/nette/forms/zipball/d7135330459168fc34ee6c5db1661d335b76cbb2",
+                "reference": "d7135330459168fc34ee6c5db1661d335b76cbb2",
                 "shasum": ""
             },
             "require": {
@@ -1656,7 +1656,7 @@
             ],
             "description": "Nette Forms: greatly facilitates web forms",
             "homepage": "https://nette.org",
-            "time": "2016-06-30 18:22:11"
+            "time": "2016-09-26 22:28:39"
         },
         {
             "name": "nette/http",

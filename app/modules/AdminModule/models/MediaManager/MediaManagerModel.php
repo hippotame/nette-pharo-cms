@@ -1,31 +1,27 @@
 <?php
+
 namespace MediaManager;
 
 use Nette;
 
-class MediaManagerModel
-{
+class MediaManagerModel {
 
     public $db;
-
     public $path;
-
     protected $tree;
-
     protected $files;
 
-    public function __construct(Nette\Database\Context $db, $path)
-    {
+    public function __construct(Nette\Database\Context $db, $path) {
         $this->db = $db;
         $this->path = $path;
         $this->tree = $this->dirtree($path);
     }
 
-    protected function router()
-    {}
+    protected function router() {
+        
+    }
 
-    protected function dirtree($path)
-    {
+    protected function dirtree($path) {
         $result = [];
         $iterator = new \DirectoryIterator($path);
         forEach ($iterator as $node) {
@@ -44,20 +40,13 @@ class MediaManagerModel
         return $result;
     }
 
-
-
-
-
-
-
-
     /**
      *
      * @param
      *
      */
-    public function getTree()
-    {
+    public function getTree() {
         return $this->tree;
     }
+
 }

@@ -13,6 +13,8 @@ class HomepagePresenter extends BasePresenter {
 
         $dbModel = new BlogCategoryModel($this->db);
         $data = $dbModel->getCategories();
+
+        $this->template->cats = $data;
     }
 
 

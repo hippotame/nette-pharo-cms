@@ -56,6 +56,10 @@ class abstractDBModel
 
     }
 
+    public function count() {
+        return $this->getSelection()->count();
+    }
+
     /**
      *
      * @return the unknown_type

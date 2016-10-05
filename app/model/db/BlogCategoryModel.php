@@ -14,25 +14,29 @@ class BlogCategoryModel extends abstractDBModel
 
     protected $table = 'blog_category';
 
-
-
-    public function getCategories() {
+    public function getCategories()
+    {
         $sql = "
             SELECT
                 a.*,
                 t.context as cat
             FROM
-                ".$this->table." a
+                " . $this->table . " a
             LEFT JOIN
-                 ".$this->txt_table." t
+                 " . $this->txt_table . " t
                      ON ( t.id_blog_category=a.name AND t.lang=1 )
         ";
         $res = $this->db->query($sql)->fetchAll();
-        $this->template->cats = $res;
-
+        return $res;
     }
 
-
-
-
+    public function getForSelect()
+    {
+        $res = $this->getCategories();
+        $select = [];
+        forEach ($res as $k => $v) {
+            $select[$v['id']] = $v['cat'];
+        }
+        return $select;
+    }
 }
