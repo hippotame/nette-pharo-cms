@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4b93c633483476f539f91a720875ddeb",
-    "content-hash": "5dea537b501c9f431c4287424e14190a",
+    "hash": "d8a5bbc0b552e4d4e9583cb69d447d54",
+    "content-hash": "e1f83e2e171b75f0aa7dbec3c4304a9f",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -2194,6 +2194,66 @@
             "time": "2015-02-23 14:15:25"
         },
         {
+            "name": "phpmailer/phpmailer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "0de97aba002936519f2feff817e5e684c3d4db38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0de97aba002936519f2feff817e5e684c3d4db38",
+                "reference": "0de97aba002936519f2feff817e5e684c3d4db38",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "suggest": {
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "class.phpmailer.php",
+                    "class.phpmaileroauth.php",
+                    "class.phpmaileroauthgoogle.php",
+                    "class.smtp.php",
+                    "class.pop3.php",
+                    "extras/EasyPeasyICS.php",
+                    "extras/ntlm_sasl_client.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2016-10-04 16:23:19"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.8.11",
             "source": {
@@ -2429,7 +2489,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nextras/tracy-query-panel": 20
+        "nextras/tracy-query-panel": 20,
+        "phpmailer/phpmailer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

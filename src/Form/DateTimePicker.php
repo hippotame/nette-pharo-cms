@@ -12,7 +12,7 @@ class DateTimePickerControl extends TextBase {
         $control = Html::el('div')->class('controls');
         $xinput = Html::el('div')->class('xdisplay_inputx form-group has-feedback');
         $input = parent::getControl();
-        $input->class('form-control datetimepicker-' . $this->getHtmlName());
+        $input->class('form-control datepicker datetimepicker-' . $this->getHtmlName());
         $span = Html::el('span')->class('fa fa-calendar-o form-control-feedback left');
         $xinput->add($input);
         $xinput->add($span);

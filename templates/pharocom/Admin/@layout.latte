@@ -32,8 +32,9 @@
         <script src="{$basePath}/themes/_data/admin/vendors/jquery/dist/jquery.min.js"></script>
         <script src="{$basePath}/themes/_data/admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="{$baseUri}/pharo/tinymce/tinymce.min.js"></script>
-        
-
+        <script src="{$baseUri}/pharo/tinymce/jquery.tinymce.min.js"></script>
+        <script src="{$baseUri}/pharo/js/pharo.js"></script>
+        <script src="{$baseUri}/pharo/js/bootbox.min.js"></script>
         {block admin_top_script}
         {/block}
 
@@ -155,7 +156,7 @@
                 <!-- /footer content -->
             </div>
         </div>
-        
+
         <!-- FastClick -->
         <script src="{$basePath}/themes/_data/admin/vendors/fastclick/lib/fastclick.js"></script>
         <!-- NProgress -->
@@ -184,7 +185,7 @@
         <script src="{$basePath}/themes/_data/admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
         <script src="{$basePath}/themes/_data/admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
         <script src="{$basePath}/themes/_data/admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-        <script src="{$basePath}/themes/_data/admin/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+        <script src="{$basePath}/themes/_data/admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 
         <!-- bootstrap-daterangepicker -->
         <script src="{$basePath}/themes/_data/admin/moment/moment.min.js"></script>
@@ -192,6 +193,16 @@
 
         <!-- Custom Theme Scripts -->
         <script src="{$basePath}/themes/_data/admin/build/js/custom.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                $('.datepicker').daterangepicker({
+                    singleDatePicker: true,
+                    calender_style: "picker_2"
+                });
+            });
+        </script>
 
 
         {block admin_bottom_scripts}

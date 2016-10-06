@@ -73,25 +73,32 @@ class BasePresenter extends CommonPresenter
     {
         foreach ($container->getComponents() as $control) {
 
-            if ($control instanceof Forms\Container) {
+            if ($control instanceof Nette\Application\UI\Form) {
                 $this->bootstrapize_controls($control);
                 continue;
             }
-
-            if ($control instanceof Controls\Button) {
+            if ($control instanceof Nette\Forms\Controls\Button) {
                 $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-default');
                 $usedPrimary = TRUE;
-            } elseif ($control instanceof Controls\TextBase || $control instanceof Controls\SelectBox || $control instanceof Controls\MultiSelectBox) {
+            } elseif (
+                    $control instanceof Nette\Forms\Controls\TextInput 
+                    || $control instanceof Nette\Forms\Controls\SelectBox 
+                    || $control instanceof Nette\Forms\Controls\MultiSelectBox) {
                 $control->getControlPrototype()->addClass('form-control');
-            } elseif ($control instanceof Controls\Checkbox || $control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
+            } elseif (
+                    $control instanceof Nette\Forms\Controls\Checkbox 
+                    || $control instanceof Nette\Forms\Controls\CheckboxList 
+                    || $control instanceof Nette\Forms\Controls\RadioList) {
                 $control->getSeparatorPrototype()
                     ->setName('div')
                     ->addClass($control->getControlPrototype()->type);
             }
 
-            if ($control instanceof Controls\Checkbox) {
+            if ($control instanceof Nette\Forms\Controls\Checkbox) {
                 $control->getLabelPrototype()->addClass('checkbox');
-            } elseif ($control instanceof Controls\CheckboxList || $control instanceof Controls\RadioList) {
+            } elseif (
+                    $control instanceof Nette\Forms\Controls\CheckboxList 
+                    || $control instanceof Nette\Forms\Controls\RadioList) {
                 $control->getLabelPrototype()->addClass('label_check');
             }
         }

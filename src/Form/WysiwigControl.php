@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace Nette\Forms\Controls;
 
 use Nette\Utils\Html;
@@ -17,27 +11,25 @@ use Nette\Utils\Html;
  */
 class WysiwigControl extends TextArea {
 
-    //put your code here
-
     protected $type = 'basic';
-    
-    protected $menubar = [];
-    
-    protected $toolbars = [
-        'basic' => 'bold, italic, underline, strikethrough, alignleft, '
-        . 'aligncenter, alignright, alignjustify, styleselect, formatselect, '
-        . 'fontsizeselect | cut, copy, paste, bullist, numlist, outdent, indent, '
-        . ' undo, redo, removeformat, subscript, superscript',
+    protected $menu = 'basic';
+    protected $height = ['basic' => 200, 'full' => 600];
+    protected $plugins = '';
+    protected $menubars = [
+        'basic' => 'edit view format'
     ];
-
-    public function setType($type) {
-        $this->type = $type;
-        return $this;
-    }
-    
-    public function getType() {
-        return $this->type;
-    }
+    protected $toolbars = [
+        'basic' => ''
+            . 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft, '
+            . 'aligncenter, alignright, alignjustify, styleselect, formatselect, '
+            . 'fontsizeselect |  bullist, numlist, outdent, indent, '
+            . ' subscript, superscript',
+        'full' => ''
+            . 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft, '
+            . 'aligncenter, alignright, alignjustify, styleselect, formatselect, '
+            . 'fontsizeselect ,|  bullist, numlist, outdent, indent, subscript, superscript' 
+            . ',| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | preview code'
+    ];
 
     public function getControl() {
 
@@ -56,23 +48,73 @@ class WysiwigControl extends TextArea {
     protected function addJS() {
         $script = Html::el('script');
         $script->language = 'javascript';
-
-        $script->add(""
-                . ""
-                . " tinymce.init({"
-                . "     selector: 'textarea.wysiwig-" . $this->getHtmlName() . "',"
-                . "     language: 'cs_CZ',"
-                . "     height: 200,"
-                . "     ".$this->setToolbar().""
-                . "});");
+        $tiny = ''
+                . ' tinymce.init({'
+                . ' selector: "textarea.wysiwig-'.$this->getHtmlName().'",'
+                . ' convert_urls: true,'
+                . ' relative_urls: false,'
+                . ' theme: "modern",'
+                . ' language: "cs_CZ",'
+                . $this->setEditorHeight() 
+                . $this->setMenuBar()
+                . $this->setToolbar()
+                . ' external_filemanager_path:"/pharo/filemanager/",
+                    filemanager_title:"Responsive Filemanager" ,
+                    external_plugins: { "filemanager" : "/pharo//filemanager/plugin.min.js"},'
+                . ' image_advtab: true ,'
+                . ' plugins: [
+                        "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                        "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                        "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
+                    ],'
+                . '});'
+                ;
+        
+        
+        $script->add($tiny);
         return $script;
     }
-    
-    protected function setToolbar( ) {
-        if ( isset( $this->toolbars[$this->getType()]) === false ) {
-            return ;
+
+    protected function setToolbar() {
+        if (isset($this->toolbars[$this->getType()]) === false) {
+            return sprintf("toolbar:'%s',", $this->toolbars['basic']);
         }
         return sprintf("toolbar:'%s',", $this->toolbars[$this->getType()]);
     }
+
+    protected function setMenuBar() {
+        if (isset($this->menubars[$this->getType()]) === false) {
+            return sprintf("menubar:'%s',", $this->menubars['basic']);
+        }
+        return sprintf("menubar:'%s',", $this->menubars[$this->getType()]);
+    }
+
+    protected function setEditorHeight() {
+        if (isset($this->height[$this->getType()]) === false) {
+            return sprintf("menubar:'%s',", $this->menubars['basic']);
+        }
+        return sprintf("height:'%s',", $this->height[$this->getType()]);
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
+
+    public function getType() {
+        return $this->type;
+    }
+
+    
+    public function getPlugins() {
+        return $this->plugins;
+    }
+
+    public function setPlugins($plugins) {
+        $this->plugins = $plugins;
+        return $this;
+    }
+
+    
 
 }

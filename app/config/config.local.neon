@@ -7,3 +7,6 @@ database:
 	password: cms
 	options:
 		lazy: yes
+services:
+#    cacheStorage: Nette\Caching\Storages\DevNullStorage # disable file cache for developement
+    cacheStorage: Nette\Caching\Storages\FileStorage(%tempDir%) # disable file cache for developement
