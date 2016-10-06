@@ -199,7 +199,10 @@
             $(document).ready(function () {
                 $('.datepicker').daterangepicker({
                     singleDatePicker: true,
-                    calender_style: "picker_2"
+                    calender_style: "picker_2",
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    },
                 });
             });
         </script>

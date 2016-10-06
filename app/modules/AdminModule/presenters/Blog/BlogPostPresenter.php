@@ -38,14 +38,15 @@ class BlogPostPresenter extends BasePresenter {
 
     protected function createComponentEdit() {
         $form = new Form();
-        $form->addMultiSelect('category', 'Category', $this->catModel->getForSelect())->setRequired();
-        $datetime = new Nette\Forms\Controls\DateTimePickerControl('Zobrazit dne');
+        $form->addMultiSelect('category', 'Category', $this->catModel->getForSelect()); //->setRequired();
+        $datetime = new Nette\Forms\Controls\DateTimePickerControl('Release Date');
         $form->addComponent($datetime, 'date_release');
         $form->addText('post_title', 'Title')->setRequired();
         $form->addSelect('post_status', 'Status', [
             'publish' => 'Publish',
             'hide' => 'Hide'
         ])->setPrompt('Publish or not')->setRequired();
+        $form->addCheckbox('post_can_comment', 'Use discusion with post', '1');
         $perex = new \Nette\Forms\Controls\WysiwigControl('Perex');
         $form->addComponent($perex, 'post_perex');
         $content = new Nette\Forms\Controls\WysiwigControl('Body');
@@ -67,6 +68,22 @@ class BlogPostPresenter extends BasePresenter {
 
     public function editValidate(Form $form) {
         $data = $form->getValues();
+        dump( $data ); die();
+        if (empty($data->category) === true) {
+            $form['category']->addError('You must select a category');
+        }
+        if (empty($data->date_release) === true) {
+            $form['date_release']->addError('You must add Release date. Even past date. You can allways disable viewing by select hide in status');
+        }
+        if (empty($data->post_title) === true) {
+            $form['post_title']->addError('You must add Title');
+        }
+         if (empty($data->post_status) === true) {
+            $form['post_status']->addError('You must Select status');
+        }
+        if ( empty( $data->post_perex) === true ) {
+            $form['post_perex']->addError('You must add perex');
+        }
     }
 
     public function editSuccessed(Form $form) {
