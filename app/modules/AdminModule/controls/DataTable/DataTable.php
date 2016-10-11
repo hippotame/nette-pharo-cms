@@ -37,6 +37,7 @@ class DataTable extends \Nette\Application\UI\Control {
     }
 
     public function render() {
+        $this->template->dataTableID = 'DT_'.md5(time().rand(0,100));
         $this->template->setFile(dirname(dirname(__DIR__)) . '/controls_templates/DataTable.latte.php');
         $this->template->headers = $this->getHeaders();
         $this->template->rows = $this->getRows();

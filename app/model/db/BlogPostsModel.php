@@ -19,4 +19,7 @@ class BlogPostsModel extends abstractDBModel
     protected $table = 'blog_post';
 
     protected $id_txt = 'id_blog_post';
+    
+   
+    
 }

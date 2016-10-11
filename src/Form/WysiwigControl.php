@@ -34,15 +34,16 @@ class WysiwigControl extends TextArea {
     public function getControl() {
 
         $super = Html::el();
-        $control = Html::el('div')->class('controls');
-        $xinput = Html::el('div')->class('xdisplay_inputx form-group');
+        $xinput = Html::el('div')->class('box-body pad');
         $input = parent::getControl();
         $input->class('form-control wysiwig-' . $this->getHtmlName());
         $xinput->add($input);
-        $control->add($xinput);
-        $super->add($control);
+        $super->add($xinput);
         $super->add($this->addJS());
         return $super;
+
+        
+        
     }
 
     protected function addJS() {

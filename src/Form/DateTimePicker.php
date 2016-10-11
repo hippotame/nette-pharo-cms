@@ -9,14 +9,14 @@ class DateTimePickerControl extends TextBase {
     public function getControl() {
 
         $super = Html::el();
-        $control = Html::el('div')->class('controls');
-        $xinput = Html::el('div')->class('xdisplay_inputx form-group has-feedback');
+        $control = Html::el('div')->class('input-group date');
+        $xinput = Html::el('div')->class('input-group-addon');
         $input = parent::getControl();
-        $input->class('form-control datepicker datetimepicker-' . $this->getHtmlName());
-        $span = Html::el('span')->class('fa fa-calendar-o form-control-feedback left');
-        $xinput->add($input);
+        $input->class('form-control pull-right datepicker datetimepicker-' . $this->getHtmlName());
+        $span = Html::el('span')->class('fa fa-calendar');
         $xinput->add($span);
         $control->add($xinput);
+        $control->add($input);
         $super->add($control);
         return $super;
     }

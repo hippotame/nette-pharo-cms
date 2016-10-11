@@ -1,0 +1,20 @@
+
+<ul class="sidebar-menu">
+    <li class="header"><a href="/admin/"><i class="fa fa-home"></i> Home </a></li>
+
+    <li><a n:href="Media:default"><i class="fa fa-home"></i> FileManager</a></li>
+
+
+    <li class="treeview">
+        <a href="#"><i class="fa fa-link"></i> <span>BLOG</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+       
+        <ul class="treeview-menu {$presenter->getActive('blog') ? 'menu-open active'}" style="display: block;">
+            <li><a n:href=":Admin:BlogCat:default"><i class="fa fa-list" aria-hidden="true"></i> Kategorie </a></li>
+            <li><a n:href=":Admin:BlogPost:default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posty </a></li>
+        </ul>
+    </li>
+</ul>

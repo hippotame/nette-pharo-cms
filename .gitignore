@@ -4,3 +4,6 @@
 log/
 temp/
 vendor/
+www/storage/
+www/storage/files
+www/storage/thumbs

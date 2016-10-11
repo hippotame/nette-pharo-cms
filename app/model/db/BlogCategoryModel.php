@@ -1,42 +1,55 @@
 <?php
-namespace DB;
 
-use Nette;
+ namespace DB;
 
-class BlogCategoryModel extends abstractDBModel
-{
+ use Nette;
 
-    protected $id;
+ class BlogCategoryModel extends abstractDBModel {
 
-    protected $name;
+     /**
+      *
+      * @var type 
+      */
+     protected $id;
 
-    protected $ordering;
+     /**
+      *
+      * @var type 
+      */
+     protected $name_txt;
 
-    protected $table = 'blog_category';
+     /**
+      *
+      * @var type 
+      */
+     protected $ordering;
 
-    public function getCategories()
-    {
-        $sql = "
-            SELECT
-                a.*,
-                t.context as cat
-            FROM
-                " . $this->table . " a
-            LEFT JOIN
-                 " . $this->txt_table . " t
-                     ON ( t.id_blog_category=a.name AND t.lang=1 )
-        ";
-        $res = $this->db->query($sql)->fetchAll();
-        return $res;
-    }
+     /**
+      *
+      * @var type 
+      */
+     protected $table = 'blog_category';
 
-    public function getForSelect()
-    {
-        $res = $this->getCategories();
-        $select = [];
-        forEach ($res as $k => $v) {
-            $select[$v['id']] = $v['cat'];
-        }
-        return $select;
-    }
-}
+     /**
+      * Function gets max new ordering from rowset
+      * @param \Nette\Utils\ArrayHash $data
+      */
+     protected function setDefaultOrdering(&$data) {
+         $data->ordering = $this->getSelection()->max('ordering +1');
+     }
+
+     /**
+      * 
+      * @return type
+      */
+     public function getForSelect() {
+         $res = $this->load();
+         $select = [];
+         forEach ($res as $k => $v) {
+             $select[$v['id']] = $v['name'];
+         }
+         return $select;
+     }
+
+ }
+ 

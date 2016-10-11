@@ -1,21 +1,48 @@
 {block content}
 
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>
-                    Blog Posts</small>
-                </h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                
-                
+<section class="content-header">
+    <h1>
+        Blog Posts <small> <a n:href="edit" class="btn btn-warning">New Post</a></small>
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-10 col-md-10">
+            <div class=" box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">All Posts</h3>
+                </div>
+                <div class="box-body">
+                    {control dataTable}
+                </div>
             </div>
         </div>
+        <div class="col-lg-2 col-md-2">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Help</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    The body of the box
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
     </div>
-</div>
+</section>
+{/block}
+
+
+{block admin_bottom_scripts}
+
+
 
 {/block}
+

@@ -1,20 +1,34 @@
 {block content}
 
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Blog Post</h2>
-                <div class="clearfix"></div>
+<section class="content-header">
+    <h1>
+        Blog Post <small>Optional description</small>
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-8 col-md-8">
+            {control edit}
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Help</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    The body of the box
+                </div>
+                <!-- /.box-body -->
             </div>
-            <div class="x_content">
-                {control edit}
-            </div>
+            <!-- /.box -->
         </div>
     </div>
-</div>
-
+</section>
 {/block}
 
 
