@@ -3,7 +3,7 @@ namespace DB;
 
 use Nette;
 
-class BlogPostsModel extends abstractDBModel
+class BlogPostsModel extends AbstractDBModel
 {
 
     public $id;

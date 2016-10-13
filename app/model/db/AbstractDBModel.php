@@ -4,7 +4,7 @@
 
  use DBExc\DBExeption;
 
- class abstractDBModel {
+ class AbstractDBModel {
 
      /**
       *
@@ -343,4 +343,3 @@
      }
 
  }
- 

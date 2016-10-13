@@ -42,7 +42,7 @@
 
      /**
       * (non-PHPdoc)
-      * @see \DB\abstractDBModel;
+      * @see \DB\AbstractDBModel;
       */
      private function init() {
          $this->model = new BlogCategoryModel($this->db);

@@ -13,6 +13,7 @@ class DateTimePickerControl extends TextBase {
         $xinput = Html::el('div')->class('input-group-addon');
         $input = parent::getControl();
         $input->class('form-control pull-right datepicker datetimepicker-' . $this->getHtmlName());
+        $input->value = $this->rawValue === '' ? $this->emptyValue : $this->rawValue;
         $span = Html::el('span')->class('fa fa-calendar');
         $xinput->add($span);
         $control->add($xinput);

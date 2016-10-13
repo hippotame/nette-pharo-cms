@@ -4,7 +4,7 @@
 
  use Nette;
 
- class BlogCategoryModel extends abstractDBModel {
+ class BlogCategoryModel extends AbstractDBModel {
 
      /**
       *

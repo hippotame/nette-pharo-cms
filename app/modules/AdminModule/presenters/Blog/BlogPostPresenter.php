@@ -80,6 +80,14 @@
                  $defaults[$key] = $this->data->$id_name;
                  $defaults[$id_name] = $this->data->$key;
              }
+             if ( preg_match( '/date\_/i',$key)) {
+                 if( $key == 'date_created' ) {
+                     continue;
+                 }
+                 if( $row instanceof Nette\Utils\DateTime ) {
+                     $defaults[$key] = $row->format('d/m/Y');
+                 }
+             }
          }
          return $defaults;
      }
@@ -105,17 +113,23 @@
              'hide'    => 'Hide'
          ])->setPrompt('Publish or not')->setRequired();
          $form->addCheckbox('post_can_comment', 'Use discusion with post', '1');
+         $imageDialog = new Nette\Forms\Controls\ImageDialog('Perex image');
+         $form->addComponent($imageDialog, 'post_image');
          $perex = new \Nette\Forms\Controls\WysiwigControl('Perex');
          $form->addComponent($perex, 'post_perex_txt');
          $content = new Nette\Forms\Controls\WysiwigControl('Body');
          $content->setType('full');
          $form->addComponent($content, 'post_content_txt');
-
+         
+         
+         $date_created = new Nette\Database\SqlLiteral('NOW()');
          if (is_null($this->id) === false) {
              $form->addHidden('id', $this->id);
              $defaults = $this->transColumn($form);
              $form->setDefaults($defaults);
+             
          }
+         $form->addHidden('date_created',$date_created);
          $form->addSubmit('send', 'Save Post'); //->setAttribute('class', 'btn btn-success');
 
          $form->onValidate[] = $this->editValidate;
@@ -161,6 +175,7 @@
 
          $data->date_release = $this->fromEditor($data->date_release);
          $data->date_closed = empty($data->date_closed) === false ? $this->fromEditor($data->date_closed) : null;
+         
          $this->model->store($data);
          $this->flashMessage('Post edited successfully', 'success');
          $this->redirect('BlogPost:');
