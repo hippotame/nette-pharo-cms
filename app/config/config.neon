@@ -27,6 +27,7 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
     debugger.session: Kdyby\SessionPanel\DI\SessionPanelExtension
+#    facebook: Kdyby\Facebook\DI\FacebookExtension
 application:
   errorPresenter: Error
   mapping:

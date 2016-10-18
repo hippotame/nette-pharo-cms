@@ -252,6 +252,7 @@
      $get_params['fldr'] = '';
 
      $get_params = http_build_query($get_params);
+     //echo $get_params; die();
      ?>
      <!DOCTYPE html>
      <html xmlns="https://www.w3.org/1999/xhtml">

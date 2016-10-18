@@ -3,7 +3,7 @@
  namespace App\AdminModule\Presenters;
 
  use Nette;
- use DB\BlogCategoryModel;
+ use App\DB\BlogCategoryModel;
  use DataTable\DataTable;
  use Nette\Application\UI\Form;
 

@@ -76,6 +76,8 @@ class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
 			throw new DuplicateNameException;
 		}
 	}
+        
+        
 
 }
 

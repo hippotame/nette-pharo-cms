@@ -1,0 +1,52 @@
+{block full_content}
+
+<div class="col-md-2 col-sm-2"></div>
+<div class="col-md-8 col-sm-8">
+    {form signInForm}
+        <header class="size-18 margin-bottom-20">
+            I'm a returning user
+        </header>
+
+        <fieldset class="nomargin">
+
+            <label class="input margin-bottom-10">
+                <i class="ico-append fa fa-user-secret"></i>
+                {input user_login}
+                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+            </label>
+
+            <label class="input margin-bottom-10">
+                <i class="ico-append fa fa-lock"></i>
+                {input user_pass}
+                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+            </label>
+
+            <div class="clearfix note margin-bottom-30">
+                <a class="pull-right" href="#">Forgot Password?</a>
+            </div>
+
+            <label class="checkbox weight-300">
+                {input remember}
+                <i></i> Keep me logged in
+            </label>
+
+        </fieldset>
+
+        <footer>
+            <button type="submit" class="btn btn-primary noradius pull-right"><i class="fa fa-check"></i> OK, LOG IN</button>
+        </footer>
+
+    {/form}
+    <!-- /login form -->
+
+    <footer>
+        Don't have an account yet? <a href="page-register-1.html"><strong>Click to register!</strong></a>
+    </footer>
+
+</div>
+<div class="col-md-2 col-sm-2"></div>
+<!-- /LOGIN -->
+
+
+
+{/block}

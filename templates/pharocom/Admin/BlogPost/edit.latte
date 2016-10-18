@@ -1,39 +1,50 @@
 {block content}
 
-<section class="content-header">
-    <h1>
-        Blog Post <small>Optional description</small>
-    </h1>
-</section>
-<section class="content">
+
+<!-- page title -->
+<header id="page-header">
+    <h1>Blog Posts</h1> <a n:href="edit" class="btn btn-warning pharo-admin-new">New Post</a>
+</header>
+<!-- /page title -->
+<div id="content" class="padding-20">
     <div class="row">
-        <div class="col-lg-8 col-md-8">
-            {control edit}
-        </div>
-        <div class="col-lg-4 col-md-4">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Help</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                    <!-- /.box-tools -->
+        <div class="col-lg-10 col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="elipsis"><!-- panel title -->
+                        <strong>EDIT</strong>
+                    </span>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    The body of the box
+                <div class="panel-body">
+                    {control edit}
                 </div>
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="elipsis"><!-- panel title -->
+                        <strong>HELP</strong>
+                    </span>
+                    <ul class="options pull-right list-inline">
+                        <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+                        <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+                        <li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    help content
+                </div>
+            </div>
         </div>
     </div>
-</section>
+</div>
+
 {/block}
-
-
 {block admin_bottom_scripts}
 
 
 
 {/block}
+
+

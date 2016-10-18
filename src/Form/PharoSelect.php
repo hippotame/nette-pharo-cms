@@ -24,13 +24,13 @@
          $control = Html::el('div')->class('');
          //$control = Html::el();
          $input = parent::getControl();
-         $input->class('form-control select2');
+         $input->class('form-control');
          $input->addAttributes(['placeholder' => 'Select item']);
          $control->add($input);
          $supper->add($control);
          $script = Html::el('script');
          $script->language = 'javascript';
-         $script->add(' $(".select2").select2();');
+         $script->add(' ');
          $supper->add($script);
          return $supper;
      }

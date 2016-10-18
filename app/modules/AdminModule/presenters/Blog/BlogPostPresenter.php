@@ -3,10 +3,10 @@
  namespace App\AdminModule\Presenters;
 
  use Nette;
- use DB\BlogPostsModel;
- use DB\BlogCategoryModel;
+ use App\DB\BlogCategoryModel;
+ use App\DB\BlogPostsModel;
  use Nette\Application\UI\Form;
- use DataTable\DataTable;
+
 
  class BlogPostPresenter extends BasePresenter {
 
@@ -62,35 +62,7 @@
          }
      }
 
-     /*
-      * (non-PHPdoc)
-      * @see \Nette\ComponentModel\Container::createComponent()
-      */
-
-     protected function transColumn(Form &$form) {
-         //dump( $this->data );
-         $defaults = [];
-         forEach ($this->data as $key => $row) {
-             $defaults[$key] = $row;
-         }
-         forEach ($this->data as $key => $row) {
-             if (preg_match('/\_txt/i', $key)) {
-                 $id_name = str_replace('_txt', '', $key);
-                 $form->addHidden($id_name, $this->data->$key);
-                 $defaults[$key] = $this->data->$id_name;
-                 $defaults[$id_name] = $this->data->$key;
-             }
-             if ( preg_match( '/date\_/i',$key)) {
-                 if( $key == 'date_created' ) {
-                     continue;
-                 }
-                 if( $row instanceof Nette\Utils\DateTime ) {
-                     $defaults[$key] = $row->format('d/m/Y');
-                 }
-             }
-         }
-         return $defaults;
-     }
+     
 
      protected function createComponentEdit() {
          $form = new Form();
@@ -112,7 +84,8 @@
              'publish' => 'Publish',
              'hide'    => 'Hide'
          ])->setPrompt('Publish or not')->setRequired();
-         $form->addCheckbox('post_can_comment', 'Use discusion with post', '1');
+         $checkbox = new \Nette\Forms\Controls\PharoCheckbox('Use discusion with post');
+         $form->addComponent($checkbox, 'post_can_comment');
          $imageDialog = new Nette\Forms\Controls\ImageDialog('Perex image');
          $form->addComponent($imageDialog, 'post_image');
          $perex = new \Nette\Forms\Controls\WysiwigControl('Perex');
@@ -129,6 +102,7 @@
              $form->setDefaults($defaults);
              
          }
+         
          $form->addHidden('date_created',$date_created);
          $form->addSubmit('send', 'Save Post'); //->setAttribute('class', 'btn btn-success');
 
@@ -181,17 +155,7 @@
          $this->redirect('BlogPost:');
      }
 
-     /*
-      * (non-PHPdoc)
-      * @see \Nette\ComponentModel\Container::createComponent()
-      */
-
-     protected function createComponentDataTable() {
-         $object = new DataTable();
-         $object->addHeads($this->heads);
-         $object->setDataSource($this->datas);
-         return $object;
-     }
+     
 
  }
  

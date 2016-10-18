@@ -19,16 +19,8 @@ class WysiwigControl extends TextArea {
         'basic' => 'edit view format'
     ];
     protected $toolbars = [
-        'basic' => ''
-            . 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft, '
-            . 'aligncenter, alignright, alignjustify, styleselect, formatselect, '
-            . 'fontsizeselect |  bullist, numlist, outdent, indent, '
-            . ' subscript, superscript',
-        'full' => ''
-            . 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft, '
-            . 'aligncenter, alignright, alignjustify, styleselect, formatselect, '
-            . 'fontsizeselect ,|  bullist, numlist, outdent, indent, subscript, superscript' 
-            . ',| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | preview code'
+        'basic' => 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft,  aligncenter, alignright, alignjustify, styleselect, formatselect,  fontsizeselect |  bullist, numlist, outdent, indent,  subscript, superscript',
+        'full' => 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, styleselect, formatselect,  fontsizeselect ,|  bullist, numlist, outdent, indent, subscript, superscript ,| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | preview code'
     ];
 
     public function getControl() {
@@ -49,26 +41,26 @@ class WysiwigControl extends TextArea {
     protected function addJS() {
         $script = Html::el('script');
         $script->language = 'javascript';
-        $tiny = ''
-                . ' tinymce.init({'
-                . ' selector: "textarea.wysiwig-'.$this->getHtmlName().'",'
-                . ' convert_urls: true,'
-                . ' relative_urls: false,'
-                . ' theme: "modern",'
-                . ' language: "cs_CZ",'
-                . $this->setEditorHeight() 
-                . $this->setMenuBar()
-                . $this->setToolbar()
-                . ' external_filemanager_path:"/pharo/filemanager/",
-                    filemanager_title:"Responsive Filemanager" ,
-                    external_plugins: { "filemanager" : "/pharo//filemanager/plugin.min.js"},'
-                . ' image_advtab: true ,'
-                . ' plugins: [
+        $tiny = '
+                tinymce.init({
+                selector: "textarea.wysiwig-'.$this->getHtmlName().'",
+                convert_urls: true,
+                relative_urls: false,
+                theme: "modern",
+                language: "cs_CZ", 
+                ' . $this->setEditorHeight()  . 
+                $this->setMenuBar() . 
+                $this->setToolbar() . 
+                ' external_filemanager_path:"/pharo/filemanager/",
+                  filemanager_title:"Responsive Filemanager" ,
+                  external_plugins: { "filemanager" : "/pharo//filemanager/plugin.min.js"},
+                   image_advtab: true ,
+                plugins: [
                         "advlist autolink link image lists charmap print preview hr anchor pagebreak",
                         "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
                         "table contextmenu directionality emoticons paste textcolor responsivefilemanager code"
-                    ],'
-                . '});'
+                    ],
+                });'
                 ;
         
         
@@ -78,23 +70,35 @@ class WysiwigControl extends TextArea {
 
     protected function setToolbar() {
         if (isset($this->toolbars[$this->getType()]) === false) {
-            return sprintf("toolbar:'%s',", $this->toolbars['basic']);
+            return sprintf("
+                    toolbar:'%s',
+                    ", $this->toolbars['basic']);
         }
-        return sprintf("toolbar:'%s',", $this->toolbars[$this->getType()]);
+        return sprintf("
+                toolbar:'%s',
+                ", $this->toolbars[$this->getType()]);
     }
 
     protected function setMenuBar() {
         if (isset($this->menubars[$this->getType()]) === false) {
-            return sprintf("menubar:'%s',", $this->menubars['basic']);
+            return sprintf("
+                    menubar:'%s',
+                    ", $this->menubars['basic']);
         }
-        return sprintf("menubar:'%s',", $this->menubars[$this->getType()]);
+        return sprintf(" 
+                menubar:'%s',
+                ", $this->menubars[$this->getType()]);
     }
 
     protected function setEditorHeight() {
         if (isset($this->height[$this->getType()]) === false) {
-            return sprintf("menubar:'%s',", $this->menubars['basic']);
+            return sprintf("
+                    menubar:%s,
+                    ", $this->menubars['basic']);
         }
-        return sprintf("height:'%s',", $this->height[$this->getType()]);
+        return sprintf("
+                height:'%s',
+                ", $this->height[$this->getType()]);
     }
 
     public function setType($type) {

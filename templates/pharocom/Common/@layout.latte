@@ -2,152 +2,251 @@
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8" />
-		<title>{ifset title}{include title|striptags} | {/ifset} Pharocom </title>
-		<meta name="keywords" content="" />
-		<meta name="description" content="" />
-		<meta name="Author" content="Tomáš Filip,  Pharocom s.r.o." />
+    <head>
+        <meta charset="utf-8" />
+        <title>{ifset title}{include title|striptags} | {/ifset} LOS GAUČOS </title>
+        <meta name="keywords" content="HTML5,CSS3,Template" />
+        <meta name="description" content="" />
+        <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+        <!-- mobile settings -->
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+        {include '../@theme_scripts.latte'}
+    </head>
+    <body class="smoothscroll enable-animation boxed">
+        <!-- wrapper -->
+        <div id="wrapper">
+            <!-- Top Bar -->
+            <div id="topBar">
+                <div class="container">
+
+                    <!-- right -->
+                    {control userBox}
+
+                    
+
+                </div>
+            </div>
+            <!-- /Top Bar -->
+            <div id="header" class="sticky clearfix">
+                <!-- TOP NAV -->
+                <header id="topNav">
+                    <div class="container">
+
+                        <!-- Mobile Menu Button -->
+                        <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        {include '../Eshop/@cart.latte'}
+
+                        <!-- Logo -->
+                        <a class="logo pull-left" href="/">
+                            LOS GAUCOS
+                        </a>
+
+
+                        <div class="navbar-collapse pull-left nav-main-collapse collapse submenu-dark">
+                            <nav class="nav-main">
+                                {include '../@menu.latte'}
+                            </nav>
+                        </div>
+
+                    </div>
+                </header>
+                <!-- /Top Nav -->
+            </div>
+            <section class="page-header dark page-header-xs shadow-after-1">
+                <div class="container">
+
+                    <h1>Hokej </h1>
+
+                    <!-- breadcrumbs -->
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li class="active">Right Sidebar</li>
+                    </ol><!-- /breadcrumbs -->
+
+                </div>
+            </section>
+            <!-- /PAGE HEADER -->
+            <!-- -->
+            <section>
+                <div class="container">
+
+                    <div class="row">
+
+                        {include full_content}
+
+                    </div>
+
+
+                </div>
+            </section>
+            <!-- / -->
 
 
 
 
+            <!-- FOOTER -->
+            <footer id="footer">
+                <div class="container">
 
-<!-- css -->
-{include '../../@scripts.latte'}
-{include '../@theme_scripts.latte'}
-{block head}
+                    <div class="row">
 
-{/block}
-</head>
+                        <div class="col-md-3">
+                            <!-- Footer Logo -->
+                            <img class="footer-logo" src={$baseThemePath}assets/images/logo-footer.png" alt="" />
 
-	<body class="smoothscroll enable-animation">
-		<!-- wrapper -->
-		<div id="wrapper">
-			<div id="header" class="sticky clearfix">
+                            <!-- Small Description -->
+                            <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
 
-				<!-- TOP NAV -->
-				<header id="topNav">
-					<div class="container">
+                            <!-- Contact Address -->
+                            <address>
+                                <ul class="list-unstyled">
+                                    <li class="footer-sprite address">
+                                        PO Box 21132<br>
+                                        Here Weare St, Melbourne<br>
+                                        Vivas 2355 Australia<br>
+                                    </li>
+                                    <li class="footer-sprite phone">
+                                        Phone: 1-800-565-2390
+                                    </li>
+                                    <li class="footer-sprite email">
+                                        <a href="mailto:support@yourname.com">support@yourname.com</a>
+                                    </li>
+                                </ul>
+                            </address>
+                            <!-- /Contact Address -->
 
-						<!-- Mobile Menu Button -->
-						<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
-							<i class="fa fa-bars"></i>
-						</button>
+                        </div>
 
-						<!-- BUTTONS -->
-						<ul class="pull-right nav nav-pills nav-second-main">
+                        <div class="col-md-3">
 
-							<!-- SEARCH -->
-							<li class="search">
-								<a href="javascript:;">
-									<i class="fa fa-user"></i>
-								</a>
-								<div class="search-box">
-									<form action="/" method="post">
-										<input type="hidden" name="____HIDDEN_{md5(time())}" value="{md5(date('J'))}">
-										<div class="">
-										<input type="text" name="src" placeholder="Username" class="form-control" />
-										</div>
-										<div class="input-group">
+                            <!-- Latest Blog Post -->
+                            <h4 class="letter-spacing-1">LATEST NEWS</h4>
+                            <ul class="footer-posts list-unstyled">
+                                <li>
+                                    <a href="#">Donec sed odio dui. Nulla vitae elit libero, a pharetra augue</a>
+                                    <small>29 June 2015</small>
+                                </li>
+                                <li>
+                                    <a href="#">Nullam id dolor id nibh ultricies</a>
+                                    <small>29 June 2015</small>
+                                </li>
+                                <li>
+                                    <a href="#">Duis mollis, est non commodo luctus</a>
+                                    <small>29 June 2015</small>
+                                </li>
+                            </ul>
+                            <!-- /Latest Blog Post -->
 
-											<input type="text" name="pss" placeholder="Password" class="form-control" />
-											<span class="input-group-btn">
-												<button class="btn btn-primary" type="submit">login</button>
-											</span>
-										</div>
-									</form>
-								</div>
-							</li>
-							<li class="quick-cart">
-								<a href="#">
-									<i class="fa fa-building-o"></i>Kontakt
-								</a>
-								<div class="quick-cart-box">
-									<h4>Pharocom s.r.o.</h4>
+                        </div>
 
-									<div class="quick-cart-wrapper clearfix margin-left-10">
-										<br>
-										<span>Puklicova 2099/23</span><br>
-										<span>České Budějovice, 37004</span><br>
-										<span>info@pharocom.com</span><br>
-										<span>+420 777 758 129</span><br>
-										<span>IČ: 25172131</span><br>
+                        <div class="col-md-2">
 
-									</div>
+                            <!-- Links -->
+                            <h4 class="letter-spacing-1">EXPLORE SMARTY</h4>
+                            <ul class="footer-links list-unstyled">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Our Services</a></li>
+                                <li><a href="#">Our Clients</a></li>
+                                <li><a href="#">Our Pricing</a></li>
+                                <li><a href="#">Smarty Tour</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                            <!-- /Links -->
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <!-- Newsletter Form -->
+                            <h4 class="letter-spacing-1">KEEP IN TOUCH</h4>
+                            <p>Subscribe to Our Newsletter to get Important News &amp; Offers</p>
+
+                            <form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Subscribe</button>
+                                    </span>
+                                </div>
+                            </form>
+                            <!-- /Newsletter Form -->
+
+                            <!-- Social Icons -->
+                            <div class="margin-top-20">
+                                <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
+
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
+
+                                <a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
+
+                                <a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
+                                    <i class="icon-gplus"></i>
+                                    <i class="icon-gplus"></i>
+                                </a>
+
+                                <a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                                    <i class="icon-linkedin"></i>
+                                    <i class="icon-linkedin"></i>
+                                </a>
+
+                                <a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
+                                    <i class="icon-rss"></i>
+                                    <i class="icon-rss"></i>
+                                </a>
+                            </div>
+                            <!-- /Social Icons -->
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="copyright">
+                    <div class="container">
+                        <ul class="pull-right nomargin list-inline mobile-block">
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li>&bull;</li>
+                            <li><a href="#">Privacy</a></li>
+                        </ul>
+                        &copy; All Rights Reserved, Company LTD
+                    </div>
+                </div>
+            </footer>
+            <!-- /FOOTER -->
+
+        </div>
+        <!-- /wrapper -->
 
 
-								</div>
-							</li>
-							<!-- /SEARCH -->
-						</ul>
-						<!-- /BUTTONS -->
+        <!-- SCROLL TO TOP -->
+        <a href="#" id="toTop"></a>
 
 
-						<!-- Logo -->
-						<a class="logo pull-left" href="/">
-							<img src="/data/img/pharocom-logo-web-1.png" alt="" />
-						</a>
-
-						<div class="navbar-collapse pull-right nav-main-collapse collapse">
-
-							<nav class="nav-main">
-
-							</nav>
-						</div>
-
-					</div>
-				</header>
-				<!-- /Top Nav -->
-			</div>
-
-	{include content}
-	<footer id="footer">
+        <!-- PRELOADER -->
+        <div id="preloader">
+            <div class="inner">
+                <span class="loader"></span>
+            </div>
+        </div><!-- /PRELOADER -->
 
 
-				<div class="copyright">
-					<div class="container">
-						<ul class="pull-right nomargin list-inline mobile-block">
-							<li><a href="#">Terms &amp; Conditions</a></li>
-							<li>&bull;</li>
-							<li><a href="#">Privacy</a></li>
-						</ul>
-						&copy; All Rights Reserved, Pharocom s.r.o.
-					</div>
-				</div>
-			</footer>
-			<!-- /FOOTER -->
-		</div>
-		<!-- /wrapper -->
-		<!-- SCROLL TO TOP -->
-		<a href="#" id="toTop"></a>
-		<!-- PRELOADER -->
-		<div id="preloader">
-			<div class="inner">
-				<span class="loader"></span>
-			</div>
-		</div><!-- /PRELOADER -->
-		<!-- JAVASCRIPT FILES -->
-		<script type="text/javascript">var plugin_path = '<?php echo $baseThemePath;?>/assets/plugins/';</script>
-		<script type="text/javascript" src="{$baseThemePath}/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="{$baseThemePath}/assets/js/scripts.js"></script>
+        <!-- JAVASCRIPT FILES -->
+        <script type="text/javascript">var plugin_path = '<?php echo $baseThemePath;?>/assets/plugins/';</script>
+        <script type="text/javascript" src="{$baseThemePath}assets/plugins/jquery/jquery-2.1.4.min.js"></script>
+
+        <script type="text/javascript" src="{$baseThemePath}assets/js/scripts.js"></script>
 
 
-		{block bottom_js_block}
-		{/block}
-
-
-
-{if ( $useAnalytics !== false )}
-			<script>
-			  (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
-			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			  ga('create', '<?php echo $useAnalytics;?>', 'auto');
-			  ga('send', 'pageview');
-			</script>
-			{/if}
-
-</body>
+    </body>
 </html>

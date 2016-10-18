@@ -5,6 +5,7 @@
  use Nette;
  use App\CommonModule\Presenters\CommonPresenter;
  use Nette\Utils\Html;
+ use DataTable\DataTable;
 
  class BasePresenter extends CommonPresenter {
 
@@ -22,6 +23,26 @@
      protected function startup() {
          parent::startup();
      }
+
+     /*      * ***********************************************************
+      * SECURE PART
+      * Methods to authentificate ADMINS 
+      * ******************************************************************
+      */
+
+     final public function isAuth() {
+         
+     }
+
+
+
+
+
+     /*      * ***********************************************************
+      * EOF SECURE PART
+      * Methods to authentificate ADMINS 
+      * ******************************************************************
+      */
 
      public function renderDefault() {
          
@@ -144,6 +165,48 @@
      public function cutPerex($string) {
          $string = strip_tags($string);
          return \Nette\Utils\PharoString::truncate($string, 100, '...');
+     }
+
+     /*
+      * (non-PHPdoc)
+      * @see \Nette\ComponentModel\Container::createComponent()
+      */
+
+     protected function transColumn(Nette\Application\UI\Form &$form) {
+         //dump( $this->data );
+         $defaults = [];
+         forEach ($this->data as $key => $row) {
+             $defaults[$key] = $row;
+         }
+         forEach ($this->data as $key => $row) {
+             if (preg_match('/\_txt/i', $key)) {
+                 $id_name = str_replace('_txt', '', $key);
+                 $form->addHidden($id_name, $this->data->$key);
+                 $defaults[$key] = $this->data->$id_name;
+                 $defaults[$id_name] = $this->data->$key;
+             }
+             if (preg_match('/date\_/i', $key)) {
+                 if ($key == 'date_created') {
+                     continue;
+                 }
+                 if ($row instanceof Nette\Utils\DateTime) {
+                     $defaults[$key] = $row->format('d/m/Y');
+                 }
+             }
+         }
+         return $defaults;
+     }
+
+     /*
+      * (non-PHPdoc)
+      * @see \Nette\ComponentModel\Container::createComponent()
+      */
+
+     protected function createComponentDataTable() {
+         $object = new DataTable();
+         $object->addHeads($this->heads);
+         $object->setDataSource($this->datas);
+         return $object;
      }
 
  }

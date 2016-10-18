@@ -14,6 +14,17 @@
          parent::__construct($database);
          $this->db = $database;
      }
+     
+     
+      public function getUser()
+    {
+        $user = parent::getUser();
+        $user->getStorage()->setNamespace('customeruser');
+        return $user->setAuthenticator(new \App\Common\model\Authenticator($this->db));
+    }
+     
+     
+     
 
      public function formatLayoutTemplateFiles() {
          $this->setTemplateName();
@@ -96,6 +107,15 @@
          // TODO check if query has a result
          // TODO check if the directory exsits
          // $this->templateName = $selection[0]->name;
+     }
+     
+     public function createComponentUserBox() {
+         $usrbox = new \App\BazarModule\Components\UsrboxControl();
+         $usrbox->setDb($this->db);
+         $usrbox->setUser($this->user);
+         $usrbox->setUsersObj(new \App\DB\UserModule($this->db));
+         //dump( $usrbox ); die();
+         return $usrbox;
      }
 
  }

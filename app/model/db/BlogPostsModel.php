@@ -1,5 +1,5 @@
 <?php
-namespace DB;
+namespace App\DB;
 
 use Nette;
 
@@ -21,5 +21,10 @@ class BlogPostsModel extends AbstractDBModel
     protected $id_txt = 'id_blog_post';
     
    
+    
+     public function countIn($id) {
+         $this->catModel = new BlogCategoryModel($this->db);
+         return $this->db->table($this->table)->where('id_blog_category',$id)->count();
+     }
     
 }

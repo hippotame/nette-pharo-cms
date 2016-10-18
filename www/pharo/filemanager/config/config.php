@@ -131,7 +131,7 @@ $config = array(
 	| in Megabytes
 	|
 	*/
-	'MaxSizeUpload' => 1,
+	'MaxSizeUpload' => 50,
 
 
 	/*
@@ -154,9 +154,9 @@ $config = array(
 
 
 	//Show or not total size in filemanager (is possible to greatly increase the calculations)
-	'show_total_size'						=> false,
+	'show_total_size'						=> true,
 	//Show or not show folder size in list view feature in filemanager (is possible, if there is a large folder, to greatly increase the calculations)
-	'show_folder_size'						=> false,
+	'show_folder_size'						=> true,
 	//Show or not show sorting feature in filemanager
 	'show_sorting_bar'						=> true,
 	//Show or not show filters button in filemanager
