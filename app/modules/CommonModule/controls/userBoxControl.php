@@ -6,7 +6,7 @@
   * and open the template in the editor.
   */
 
- namespace App\BazarModule\Components;
+ namespace App\CommonModule\Components;
 
  use Nette\Application\UI;
 

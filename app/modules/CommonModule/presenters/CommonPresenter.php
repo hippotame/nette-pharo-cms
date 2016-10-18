@@ -110,7 +110,7 @@
      }
      
      public function createComponentUserBox() {
-         $usrbox = new \App\BazarModule\Components\UsrboxControl();
+         $usrbox = new \App\CommonModule\Components\UsrboxControl();
          $usrbox->setDb($this->db);
          $usrbox->setUser($this->user);
          $usrbox->setUsersObj(new \App\DB\UserModule($this->db));
