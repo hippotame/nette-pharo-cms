@@ -7,7 +7,7 @@
   *
   * @author hippo
   */
- class UserModule extends AbstractDBModel {
+ class UserModel extends AbstractDBModel {
      /**
       *
       * @var type 
@@ -17,4 +17,5 @@
      
      protected $table = 'users';
  }
+ 
  

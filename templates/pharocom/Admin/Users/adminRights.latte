@@ -3,7 +3,7 @@
 
 <!-- page title -->
 <header id="page-header">
-    <h1>Blog Posts</h1> <a n:href="edit" class="btn btn-warning pharo-admin-new">New Post</a>
+    <h1>Users</h1>
 </header>
 <!-- /page title -->
 <div id="content" class="padding-20">
@@ -12,11 +12,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="elipsis"><!-- panel title -->
-                        <strong>EDIT</strong>
+                        <strong>EDIT Rights</strong>
                     </span>
                 </div>
                 <div class="panel-body">
-                    {control edit}
+                   {control editRightsForm}
                 </div>
             </div>
         </div>
@@ -39,33 +39,6 @@
         </div>
     </div>
 </div>
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="300" 
-     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <iframe width="850" height="400" src="/pharo/filemanager/dialog.php?type=1&editor=none&noAviary=1&field_id=ImageID&relative_url=1" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
 
 {/block}
 {block admin_bottom_scripts}

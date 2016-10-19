@@ -55,7 +55,7 @@
 
          try {
              $this->getUser()->login($values->user_login, $values->user_pass);
-             $this->redirect('Homepage:');
+             $this->redirect(':Front:Homepage:default');
          } catch (Nette\Security\AuthenticationException $e) {
              $form->addError($e->getMessage());
          }

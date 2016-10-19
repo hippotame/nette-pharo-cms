@@ -52,6 +52,11 @@
      }
      
      
+     public function getById($id) {
+         
+     }
+     
+     
     
 
  }

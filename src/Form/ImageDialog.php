@@ -12,7 +12,9 @@
        <input class="form-control" type="text">
        <span class="input-group-btn">
        <button type="button" class="btn btn-info btn-flat">Go!</button>
-       </span>
+       </span><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	Bootstrap Modal
+</button>
        </div> */
 
 
@@ -25,10 +27,7 @@
          $input->addAttributes(['id'=>'ImageID']);
          $input->value = $this->rawValue === '' ? $this->emptyValue : $this->rawValue;
          $span = Html::el('span class="input-group-btn"');
-         $button = Html::el('a '
-                 . 'href="/pharo/filemanager/dialog.php?type=1&editor=none&noAviary=1&'
-                 . 'field_id=ImageID&relative_url=1" '
-                 . 'class="btn  btn-info btn-flat iframe-btn" '
+         $button = Html::el('button data-toggle="modal" data-target="#myModal" class="btn  btn-info btn-flat iframe-btn" '
                  . 'type="button"');
          $button->setText('Image Perex');
 

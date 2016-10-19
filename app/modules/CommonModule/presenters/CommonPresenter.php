@@ -113,7 +113,7 @@
          $usrbox = new \App\CommonModule\Components\UsrboxControl();
          $usrbox->setDb($this->db);
          $usrbox->setUser($this->user);
-         $usrbox->setUsersObj(new \App\DB\UserModule($this->db));
+         $usrbox->setUsersObj(new \App\DB\UserModel($this->db));
          //dump( $usrbox ); die();
          return $usrbox;
      }

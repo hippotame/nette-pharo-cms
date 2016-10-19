@@ -2,8 +2,10 @@
 
  namespace App\AdminModule\Presenters;
 
- use App\DB\UserModule;
+ use App\DB\UserModel;
+ use App\DB\UserRightsModel;
  use Nette\Application\UI\Form;
+ use Nette\Utils\Html;
 
  class UsersPresenter extends BasePresenter {
 
@@ -24,7 +26,7 @@
              'name'  => 'Title',
              'width' => 150
          ],
-         'adminRights' => [
+         'adminRights'  => [
              'name'  => 'ADMIN RIGTS',
              'width' => 100
          ],
@@ -41,7 +43,7 @@
 
      protected function startup() {
          parent::startup();
-         $this->model = new UserModule($this->db);
+         $this->model = new UserModel($this->db);
      }
 
      public function renderDefault() {
@@ -51,10 +53,87 @@
          }
          $this->datas = $this->model->load($this->lang);
      }
-     
-     
-     public function actionAdminRights ($id) {
-         
+
+     public function actionAdminRights($id) {
+         if ($id == null) {
+             die('To nejde, musime mit id');
+         }
+         $rightsModel = new UserRightsModel($this->db);
+         $this->data = $rightsModel->load(1);
+         $this->id = $id;
+     }
+
+     public function createComponentEditRightsForm() {
+         $form = new Form();
+         $modules = new \App\DB\ModulesModel($this->db);
+         $data = $modules->load();
+         $options = [
+             'pharo_read'  => 'Read',
+             'pharo_write' => 'Write',
+             'pharo_admin' => 'Admin'
+         ];
+         forEach ($data as $key => $row) {
+             if ($row['public'] == '0') {
+                 continue;
+             }
+             $form->addGroup($row['module_name']);
+             forEach ($options as $k => $v) {
+                 $checkbox = new \Nette\Forms\Controls\PharoCheckbox($row['module'] . ' ' . $v);
+                 $form->addComponent($checkbox, $row['module'] . '_' . $k . '');
+             }
+         }
+         $defaults = [];
+         forEach ($this->data as $key => $row) {
+             $defaults[sprintf('%s_%s', $row['module'], 'pharo_read')] = $row['pharo_read'];
+             $defaults[sprintf('%s_%s', $row['module'], 'pharo_write')] = $row['pharo_write'];
+             $defaults[sprintf('%s_%s', $row['module'], 'pharo_admin')] = $row['pharo_admin'];
+         }
+         $form->setDefaults($defaults);
+         $form->addSubmit('send', 'Save');
+         $this->bootstrapize($form);
+         $form->onSuccess[] = $this->rightsEditSuccessed;
+         return $form;
+     }
+
+     public function rightsEditSuccessed(Form $form) {
+
+         $data = $form->getValues();
+         $return = [];
+         forEach ($data as $key => $value) {
+             $expl = explode('_', $key);
+             $name = $expl[0];
+             unset($expl[0]);
+             $in_key = join('_', $expl);
+             $return[$name][$in_key] = $value;
+         }
+         $insert = [];
+         $a = 0;
+         $insert[$a]['id_user'] = $this->id;
+         $insert[$a]['module'] = 'Common';
+         $insert[$a]['pharo_read'] = 1;
+         $insert[$a]['pharo_write'] = 1;
+         $insert[$a]['pharo_admin'] = 1;
+         $a++;
+         $insert[$a]['id_user'] = $this->id;
+         $insert[$a]['module'] = 'Front';
+         $insert[$a]['pharo_read'] = 1;
+         $insert[$a]['pharo_write'] = 1;
+         $insert[$a]['pharo_admin'] = 1;
+         $a++;
+         forEach ($return as $key => $row) {
+             $insert[$a]['id_user'] = $this->id;
+             $insert[$a]['module'] = $key;
+             $insert[$a]['pharo_read'] = $this->transCheckbox($row['pharo_read']);
+             $insert[$a]['pharo_write'] = $this->transCheckbox($row['pharo_write']);
+             $insert[$a]['pharo_admin'] = $this->transCheckbox($row['pharo_admin']);
+             $a++;
+         }
+
+         $rightsModel = new UserRightsModel($this->db);
+         $rightsModel->insertRights($this->id, $insert);
+
+         $this->flashMessage('Rights where edited successfully', 'success');
+         $this->redirect('default');
      }
 
      public function actionEdit($id = null) {

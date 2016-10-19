@@ -40,9 +40,9 @@
       *
       * @param \Nette\Database\Context $database
       */
-     public function __construct(\Nette\Database\Context $database) {
+     public function __construct(\Nette\Database\Context $database, $txtTable = null) {
          $this->db = $database;
-         $this->setTXTTable();
+         $this->setTXTTable($txtTable);
          $this->txts = new \stdClass();
      }
 
@@ -118,13 +118,17 @@
          if (is_null($id) === false) {
              $sql .= " WHERE a.id='" . $id . "'";
              //echo $sql; die();
+
              return $this->db->query($sql)->fetch();
          } else {
 
              $sql = $sql . $order;
+
              return $this->db->query($sql)->fetchAll();
          }
      }
+
+     
 
      /**
       * 
@@ -230,8 +234,12 @@
       * @throws DBExeption
       */
      public function setTXTTable($txt_table = null) {
+
          if (is_null($this->table) === false) {
              $this->txt_table = $this->table . '_txt';
+             return true;
+         }
+         if ($txt_table === false) {
              return true;
          }
          throw new DBExeption('Table TXT se musi nasetovat');
@@ -343,3 +351,4 @@
      }
 
  }
+ 

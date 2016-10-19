@@ -21,7 +21,7 @@
          $this->db = $db;
      }
 
-     public function setUsersObj(\App\DB\UserModule $obj) {
+     public function setUsersObj(\App\DB\UserModel $obj) {
          $this->userObj = $obj;
      }
 

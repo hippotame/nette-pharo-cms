@@ -13,7 +13,7 @@ class HomepagePresenter extends BasePresenter
         parent::startup();
         
         if( $this->getModule() == 'Front' ) {
-            $this->redirect(':Blog:Homepage:default');
+            $this->redirect(':Blog:Blog:default');
         }
         
     }

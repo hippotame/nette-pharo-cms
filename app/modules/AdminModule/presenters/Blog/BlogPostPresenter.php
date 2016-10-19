@@ -149,7 +149,7 @@
 
          $data->date_release = $this->fromEditor($data->date_release);
          $data->date_closed = empty($data->date_closed) === false ? $this->fromEditor($data->date_closed) : null;
-         
+         $data->post_can_comment = $this->transCheckbox($data->post_can_comment);
          $this->model->store($data);
          $this->flashMessage('Post edited successfully', 'success');
          $this->redirect('BlogPost:');

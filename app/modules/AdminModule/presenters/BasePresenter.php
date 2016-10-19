@@ -103,19 +103,26 @@
                  $control->getControlPrototype()->addClass(empty($usedPrimary) ? 'btn btn-primary' : 'btn btn-default');
                  $usedPrimary = TRUE;
              } elseif (
-                     $control instanceof Nette\Forms\Controls\TextInput || $control instanceof Nette\Forms\Controls\SelectBox || $control instanceof Nette\Forms\Controls\MultiSelectBox) {
+                     $control instanceof Nette\Forms\Controls\TextInput || 
+                     $control instanceof Nette\Forms\Controls\SelectBox || 
+                     $control instanceof Nette\Forms\Controls\MultiSelectBox) {
                  $control->getControlPrototype()->addClass('form-control');
              } elseif (
-                     $control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\CheckboxList || $control instanceof Nette\Forms\Controls\RadioList) {
+                     $control instanceof Nette\Forms\Controls\Checkbox || 
+                     $control instanceof Nette\Forms\Controls\CheckboxList || 
+                     $control instanceof Nette\Forms\Controls\RadioList) {
                  $control->getSeparatorPrototype()
-                         ->setName('div')
-                         ->addClass($control->getControlPrototype()->type);
+                         ->setName('');
+                         //->addClass('form-control');
+                 //$control->getControlPrototype()->type
              }
              if ($control instanceof Nette\Forms\Controls\Checkbox) {
                  $control->getLabelPrototype()->addClass('checkbox');
              } elseif (
-                     $control instanceof Nette\Forms\Controls\CheckboxList || $control instanceof Nette\Forms\Controls\RadioList) {
-                 $control->getLabelPrototype()->addClass('label_check');
+                     $control instanceof Nette\Forms\Controls\CheckboxList || 
+                     $control instanceof Nette\Forms\Controls\RadioList) {
+                 
+                 $control->getLabelPrototype()->addClass('checkbox');
              }
          }
      }
@@ -195,6 +202,14 @@
              }
          }
          return $defaults;
+     }
+     
+     
+     public function transCheckbox($value) {
+         if( $value == 'on' ) {
+             return 1;
+         } 
+         return 0;
      }
 
      /*
