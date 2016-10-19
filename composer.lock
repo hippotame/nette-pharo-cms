@@ -1588,16 +1588,16 @@
         },
         {
             "name": "nette/database",
-            "version": "v2.3.9",
+            "version": "v2.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/database.git",
-                "reference": "a4c7ea17470a7d888df5738f5e63b2605899f289"
+                "reference": "ed0dc48c58ddf9042f736f3c1ac431dfdd825019"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/database/zipball/a4c7ea17470a7d888df5738f5e63b2605899f289",
-                "reference": "a4c7ea17470a7d888df5738f5e63b2605899f289",
+                "url": "https://api.github.com/repos/nette/database/zipball/ed0dc48c58ddf9042f736f3c1ac431dfdd825019",
+                "reference": "ed0dc48c58ddf9042f736f3c1ac431dfdd825019",
                 "shasum": ""
             },
             "require": {
@@ -1638,7 +1638,7 @@
             ],
             "description": "Nette Database Component",
             "homepage": "https://nette.org",
-            "time": "2016-05-30 14:52:29"
+            "time": "2016-10-18 13:30:07"
         },
         {
             "name": "nette/di",
@@ -2338,12 +2338,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "0de97aba002936519f2feff817e5e684c3d4db38"
+                "reference": "cf8cd058d4fd77d072cdaabac73ffd81b351e876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/0de97aba002936519f2feff817e5e684c3d4db38",
-                "reference": "0de97aba002936519f2feff817e5e684c3d4db38",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cf8cd058d4fd77d072cdaabac73ffd81b351e876",
+                "reference": "cf8cd058d4fd77d072cdaabac73ffd81b351e876",
                 "shasum": ""
             },
             "require": {
@@ -2390,7 +2390,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2016-10-04 16:23:19"
+            "time": "2016-10-17 16:56:25"
         },
         {
             "name": "psr/log",
