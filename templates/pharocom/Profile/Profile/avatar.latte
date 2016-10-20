@@ -1,0 +1,23 @@
+{block content}
+<div id="avatar">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                <div class="thumbnail">
+                    <img class="img-responsive" src="{$user_data->avatar != '' ? $user_data->avatar}" alt="" />
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-8">
+                {control avatarForm}
+
+                {*<div class="clearfix margin-top-40">
+                    <span class="label label-warning">NOTE! </span>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet!
+                    </p>
+                </div>*}
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

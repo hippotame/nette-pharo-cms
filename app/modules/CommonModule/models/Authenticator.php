@@ -17,6 +17,8 @@
 
      const
              TABLE_NAME = 'users',
+             TABLE_RIGHTS = 'user_rights',
+             COLUMN_ID_RIGHTS = 'id_user',
              COLUMN_ID = 'id',
              COLUMN_NAME = 'user_login',
              COLUMN_EMAIL = 'user_email',
@@ -56,8 +58,17 @@
              $arr = $row->toArray();
              $password = \App\Model\Security\Password::hash($arr[self::COLUMN_NAME], $password);
              if (\App\Model\Security\Password::verify($password, $arr[self::COLUMN_PASSWORD_HASH])) {
+
                  unset($arr[self::COLUMN_PASSWORD_HASH]);
-                 return new Nette\Security\Identity($row[self::COLUMN_ID], 'user', $arr);
+                 $rightsObj = new \App\Model\UserManager($this->database, $arr[self::COLUMN_ID]);
+                 $rights = $rightsObj->setRights();
+                 $arr = $arr + $rights;
+                 $role = 'user';
+                 if ($arr['is_admin'] == '1') {
+                     $role = 'admin';
+                 }
+                 //dump($arr);die();
+                 return new Nette\Security\Identity($row[self::COLUMN_ID], $role, $arr);
              } else {
                  throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
              }

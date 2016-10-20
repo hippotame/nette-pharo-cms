@@ -60,6 +60,12 @@
          return $this->db->query($sql)->fetchAll();
      }
 
+     
+     
+     
+     
+     
+     
  }
 
  /*$where = ' WHERE a.post_status=\'publish\' AND a.date_release < \'' . $now->format('Y-m-d H:i:s') . '\' ';

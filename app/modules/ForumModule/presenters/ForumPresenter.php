@@ -13,5 +13,21 @@
   */
  class ForumPresenter extends BasePresenter {
      //put your code here
+     
+     
+     public function beforeRender() {
+         parent::beforeRender();
+         $this->restrictAccess(100);
+     }
+     
+     public function renderDefault(){
+         
+         
+         
+         
+         
+     }
+     
+     
  }
  

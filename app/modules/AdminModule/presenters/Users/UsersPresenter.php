@@ -59,7 +59,7 @@
              die('To nejde, musime mit id');
          }
          $rightsModel = new UserRightsModel($this->db);
-         $this->data = $rightsModel->load(1);
+         $this->data = $rightsModel->loadByUser($this->id);
          $this->id = $id;
      }
 

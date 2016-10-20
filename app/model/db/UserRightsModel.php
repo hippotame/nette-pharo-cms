@@ -21,5 +21,9 @@
          $this->getSelection()->insert($insert);
      }
 
+     public function loadByUser($id) {
+         return $this->getSelection()->where('id_user', $id)->fetchAll();
+     }
+
  }
  

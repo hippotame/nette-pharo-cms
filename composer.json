@@ -26,7 +26,8 @@
     "kdyby/doctrine" : "^3.1",
     "kdyby/events" : "^3.0",
     "phpmailer/phpmailer": "dev-master",
-    "kdyby/facebook": "^2.0"
+    "kdyby/facebook": "^2.0",
+    "tomaj/nette-bootstrap-form": "^1.2"
   },
   "require-dev" : {
     "nette/tester" : "~1.3"

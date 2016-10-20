@@ -22,7 +22,7 @@
          $adminRouter[] = new Route('admin/<presenter>/<action>', 'Dashboard:default');
 
          $router[] = $blogRouter = new RouteList('Blog');
-         $blogRouter[] = new Route('blog/<presenter>/<action>[/<id>]', 'Blog:default');
+         $blogRouter[] = new Route('blog/<action>[/<id>]', 'Blog:default');
 
          $router[] = $profileRouter = new RouteList('Profile');
          $profileRouter[] = new Route('profile/<action>[/<id>]', 'Profile:default');

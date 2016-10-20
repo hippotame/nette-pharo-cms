@@ -16,10 +16,10 @@ class WysiwigControl extends TextArea {
     protected $height = ['basic' => 200, 'full' => 600];
     protected $plugins = '';
     protected $menubars = [
-        'basic' => 'edit view format'
+        'basic' => 'edit view format '
     ];
     protected $toolbars = [
-        'basic' => 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft,  aligncenter, alignright, alignjustify, styleselect, formatselect,  fontsizeselect |  bullist, numlist, outdent, indent,  subscript, superscript',
+        'basic' => 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft,  aligncenter, alignright, alignjustify, styleselect, formatselect,  fontsizeselect |  bullist, numlist, outdent, indent,  subscript, superscript | preview code',
         'full' => 'undo, redo, cut, copy, paste, | bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, styleselect, formatselect,  fontsizeselect ,|  bullist, numlist, outdent, indent, subscript, superscript ,| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | preview code'
     ];
 
@@ -46,6 +46,7 @@ class WysiwigControl extends TextArea {
                 selector: "textarea.wysiwig-'.$this->getHtmlName().'",
                 convert_urls: true,
                 relative_urls: false,
+                entity_encoding : "raw",
                 theme: "modern",
                 language: "cs_CZ", 
                 ' . $this->setEditorHeight()  . 

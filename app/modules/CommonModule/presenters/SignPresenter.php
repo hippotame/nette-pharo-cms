@@ -25,11 +25,11 @@
          $form = new \Nette\Application\UI\Form();
          $form->elementPrototype->addAttributes(['class' => 'sky-form boxed']);
          $form->addText('user_login', 'E-mail / login)')
-                 ->setAttribute('placeholder','User name or Email')
+                 ->setAttribute('placeholder', 'User name or Email')
                  ->setRequired('Uveďte svůj registrovaný login.');
 
          $form->addPassword('user_pass', 'Heslo')
-                 ->setAttribute('placeholder','Password')
+                 ->setAttribute('placeholder', 'Password')
                  ->setRequired('Zadejte heslo.');
 
          $form->addCheckbox('remember', 'Pamatuj si mne');
@@ -39,7 +39,7 @@
          // call method signInFormSucceeded() on success
          $form->onSuccess[] = $this->signInFormSucceeded;
 
-        // $this->bootstrapize($form);
+         // $this->bootstrapize($form);
 
          return $form;
      }
@@ -55,10 +55,20 @@
 
          try {
              $this->getUser()->login($values->user_login, $values->user_pass);
+             $this->flashMessage('You have been logged in','info');
              $this->redirect(':Front:Homepage:default');
          } catch (Nette\Security\AuthenticationException $e) {
              $form->addError($e->getMessage());
          }
+     }
+
+     public function renderOut() {
+         if (!$this->getUser()->isLoggedIn()) {
+             $this->redirect(':Common:Sign:in');
+         }
+         $this->user->logout(1);
+         $this->flashMessage('You have been logged out','info');
+         $this->redirect(':Common:Sign:in');
      }
 
  }

@@ -13,18 +13,34 @@
      public function __construct(Nette\Database\Context $database) {
          parent::__construct($database);
          $this->db = $database;
+         
      }
-     
-     
-      public function getUser()
-    {
-        $user = parent::getUser();
-        $user->getStorage()->setNamespace('customeruser');
-        return $user->setAuthenticator(new \App\Common\model\Authenticator($this->db));
-    }
-     
-     
-     
+     protected function startup() {
+         parent::startup();
+         $this->setTemplateName();
+     }
+
+     public function getUser() {
+         $user = parent::getUser();
+         $user->getStorage()->setNamespace('customeruser');
+         return $user->setAuthenticator(new \App\Common\model\Authenticator($this->db));
+     }
+
+     public function restrictAccess($rights = 100) {
+         $module = $this->getModule();
+         if ($this->user->isLoggedIn() === false) {
+             $this->flashMessage(sprintf('You must sign in to see %s section', $module), 'danger');
+             $this->redirect(':Common:Sign:in');
+         }
+         if ( isset ( $this->user->getIdentity()->$module ) === true ) {
+             if( $this->user->getIdentity()->$module >= $rights ) {
+                 return true;
+             }
+         }
+         $this->template->setFile(__TPL__.'/pharocom/Common/components/restricted.latte');
+         $this->template->render();
+         $this->terminate();
+     }
 
      public function formatLayoutTemplateFiles() {
          $this->setTemplateName();
@@ -67,15 +83,14 @@
 
          return $this->name;
      }
-     
-     
-     public function getActive( $name ) {
-         if ( preg_match ( '/'.$name.'/i', $this->getPureName(false ) ) ) {
+
+     public function getActive($name) {
+         if (preg_match('/' . $name . '/i', $this->getPureName(false))) {
              return true;
          }
          return false;
      }
- 
+
      /**
       * Formats view template file names.
       *
@@ -108,7 +123,7 @@
          // TODO check if the directory exsits
          // $this->templateName = $selection[0]->name;
      }
-     
+
      public function createComponentUserBox() {
          $usrbox = new \App\CommonModule\Components\UsrboxControl();
          $usrbox->setDb($this->db);
@@ -117,6 +132,11 @@
          //dump( $usrbox ); die();
          return $usrbox;
      }
+     
+     
+     
+     
+    
 
  }
  
