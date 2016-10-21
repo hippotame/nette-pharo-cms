@@ -58,7 +58,7 @@
             <section class="page-header dark page-header-xs shadow-after-1">
                 <div class="container">
 
-                    <h1>Hokej </h1>
+                    <h1>Glosy (nejen) o hokeji </h1>
 
                     <!-- breadcrumbs -->
                     <ol class="breadcrumb">
@@ -70,6 +70,21 @@
                 </div>
             </section>
             <!-- /PAGE HEADER -->
+            {if !in_array($module,['Forum','Profile'])}
+            <!-- HOME -->
+            <section id="home" class="height-450" style="background:url('/themes/_data/img/cropped-ice-hockey.jpg')">
+                <div class="display-table">
+                    <div class="display-table-cell vertical-align-middle">
+                        <div class="container text-center">
+                            <h1 class="nomargin size-50 weight-300 wow fadeInUp" data-wow-delay="0.4s">Los Gaučos - fandíme v sedě</h1>
+                            <p class="lead font-lato size-30 wow fadeInUp" data-wow-delay="0.7s">Glosy (nejen) o hokeji</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- /HOME -->
+            {/if}
             <!-- -->
             <section>
                 <div class="container">

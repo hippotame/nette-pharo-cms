@@ -11,7 +11,7 @@
 
      protected $id = null;
      protected $model;
-     protected $lang = 1;
+     public $lang = 1;
      protected $heads = [];
      protected $datas = [];
 

@@ -9,15 +9,30 @@
      protected $db;
      public $useAnalytics = false;
      private $templateName = 'pharocom';
+     protected $userManager;
+     protected $userData;
+     protected $data;
+
+     /** @persistent */
+     public $lang;
+
+     /** @var \Pharo\Translator */
+     protected $translator;
 
      public function __construct(Nette\Database\Context $database) {
          parent::__construct($database);
          $this->db = $database;
-         
      }
+
      protected function startup() {
          parent::startup();
          $this->setTemplateName();
+     }
+
+     protected function beforeRender() {
+         parent::beforeRender();
+         $this->template->module = $this->getModule();
+         $this->template->action = $this->getAction();
      }
 
      public function getUser() {
@@ -32,12 +47,19 @@
              $this->flashMessage(sprintf('You must sign in to see %s section', $module), 'danger');
              $this->redirect(':Common:Sign:in');
          }
-         if ( isset ( $this->user->getIdentity()->$module ) === true ) {
-             if( $this->user->getIdentity()->$module >= $rights ) {
+
+         if (isset($this->user->getIdentity()->$module) === true) {
+             if ($this->user->getIdentity()->$module >= $rights) {
+                 $this->data = $this->user->getIdentity();
+                 $this->userManager = new \App\Model\UserManager($this->db, $this->data->id);
+                 $this->userData = $this->userManager->getData();
+                 \Pharo\UserFileStorage::checkUserStorage($this->data->id);
+                 $this->template->user = $this->data;
+                 $this->template->user_data = $this->userData;
                  return true;
              }
          }
-         $this->template->setFile(__TPL__.'/pharocom/Common/components/restricted.latte');
+         $this->template->setFile(__TPL__ . '/pharocom/Common/components/restricted.latte');
          $this->template->render();
          $this->terminate();
      }
@@ -132,11 +154,6 @@
          //dump( $usrbox ); die();
          return $usrbox;
      }
-     
-     
-     
-     
-    
 
  }
  

@@ -42,3 +42,4 @@ services:
   # system services
     entityManager: @Kdyby\Doctrine\EntityManager
     router: App\RouterFactory::createRouter
+    translator: \Pharo\Translator

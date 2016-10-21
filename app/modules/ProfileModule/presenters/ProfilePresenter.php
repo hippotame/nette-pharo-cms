@@ -8,8 +8,7 @@
 
      protected $model;
      protected $data;
-     protected $userManager;
-     protected $userData;
+     
 
      /**
       *
