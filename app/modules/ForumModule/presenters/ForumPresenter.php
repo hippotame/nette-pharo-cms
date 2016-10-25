@@ -31,6 +31,9 @@
      }
 
      public function getUserDataForForum($id) {
+         $posts = [];
+         $user = [];
+         $userData = [];
          $user = $this->db->table('users')->where('id', $id)->fetch()->toArray();
          $userData = $this->db->table('users_data')->where('id_user', $id)->fetch()->toArray();
          unset($user['user_pass']);
@@ -38,12 +41,13 @@
          if (empty($user['display_name'])) {
              $user['display_name'] = $user['user_login'];
          }
-         return $user + $userData;
+         $posts['count_posts'] = $this->db->table('forum_post')->where('id_user', $id)->count();
+         return $user + $userData + $posts;
      }
 
      public function renderDefault($page = 1, $items = 0) {
 
-         $this->getUserDataForForum(1);
+         $this->template->user = $this->getUserDataForForum($this->user->getId());
          $paginator = new \Nette\Utils\Paginator;
          $paginator->setItemsPerPage(30);
          $paginator->setPage($page);
@@ -66,6 +70,32 @@
          $this->getCommand();
      }
 
+     public function actionSearch($s, $page = 1, $items = 0) {
+         $s = \Nette\Utils\Strings::normalize($s);
+         //vyhod prazdne 
+         if (empty($s) === true) {
+             $this->flashMessage('Search string must not be empty', 'danger');
+             $this->redirect('default');
+         }
+         $search = new \App\Model\Search($this->db);
+         //search users
+         $users = $search->SearchUser($s);
+         if (empty($users) === false) {
+             $paginator = new \Nette\Utils\Paginator;
+             $paginator->setItemsPerPage(30);
+             $paginator->setPage($page);
+             $posts = $this->db->table('forum_post')
+                             ->where('id_user', $users->id)
+                             ->order('date_release DESC')
+                             ->limit($paginator->getLength(), $paginator->getOffset())->fetchAll();
+         }
+         //$this->db->table('users')->
+
+         echo 'working on it';
+         dump($s);
+         die();
+     }
+
      private function getCommand() {
          $query = $this->getHttpRequest()->getQuery();
          if (empty($this->getHttpRequest()->getQuery('command')) === false) {
@@ -77,7 +107,7 @@
                  $this->postDefaults['parent_id_post'] = $post->id;
                  $post->post_content = str_replace('<blockquote>', '', $post->post_content);
                  $post->post_content = str_replace('</blockquote>', '', $post->post_content);
-                 $this->postDefaults['post_content'] = sprintf('<blockquote>%s</blockquote><br /><br />',$post->post_content);
+                 $this->postDefaults['post_content'] = sprintf('<blockquote>%s</blockquote><br /><br />', $post->post_content);
              }
          }
      }
@@ -105,8 +135,7 @@
          $data = $form->getValues();
          $data->date_release = new \Nette\Database\SqlLiteral('NOW()');
          $this->model->store($data, 1);
-         dump($data);
-         die();
+         $this->redirect('default#forum_top');
      }
 
  }

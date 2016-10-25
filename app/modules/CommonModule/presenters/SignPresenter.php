@@ -32,8 +32,9 @@
                  ->setAttribute('placeholder', 'Password')
                  ->setRequired('Zadejte heslo.');
 
-         $form->addCheckbox('remember', 'Pamatuj si mne');
-
+         $remember = new \Nette\Forms\Controls\PharoCheckbox('Pamatuj si mne');
+         $form->addComponent($remember, 'remember');
+         $form->setRenderer(new \Tomaj\Form\Renderer\BootstrapVerticalRenderer);
          $form->addSubmit('send', 'Přihlásit se');
 
          // call method signInFormSucceeded() on success
@@ -55,7 +56,7 @@
 
          try {
              $this->getUser()->login($values->user_login, $values->user_pass);
-             $this->flashMessage('You have been logged in','info');
+             $this->flashMessage('You have been logged in', 'info');
              $this->redirect(':Front:Homepage:default');
          } catch (Nette\Security\AuthenticationException $e) {
              $form->addError($e->getMessage());
@@ -67,7 +68,7 @@
              $this->redirect(':Common:Sign:in');
          }
          $this->user->logout(1);
-         $this->flashMessage('You have been logged out','info');
+         $this->flashMessage('You have been logged out', 'info');
          $this->redirect(':Common:Sign:in');
      }
 

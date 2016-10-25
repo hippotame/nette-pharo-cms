@@ -28,6 +28,7 @@
          $profileRouter[] = new Route('profile/<action>[/<id>]', 'Profile:default');
 
          $router[] = $forumRouter = new RouteList('Forum');
+         $forumRouter[] = new Route('forum/search','Forum:search');
          $forumRouter[] = new Route('forum/<presenter>/<action>[/<id>]', 'Forum:default');
 
          $router[] = $frontRouter = new RouteList('Front');

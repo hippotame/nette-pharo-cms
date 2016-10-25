@@ -12,9 +12,10 @@
      protected $userManager;
      protected $userData;
      protected $data;
+     protected $modulesWithSlideshow = ['Forum','Profile','Common'];
 
-     /** @persistent */
-     public $lang;
+     ///** @persistent */
+     #public $lang;
 
      /** @var \Pharo\Translator */
      protected $translator;
@@ -33,6 +34,7 @@
          parent::beforeRender();
          $this->template->module = $this->getModule();
          $this->template->action = $this->getAction();
+         $this->template->modulesWithSlideshow = $this->modulesWithSlideshow;
      }
 
      public function getUser() {
@@ -153,6 +155,10 @@
          $usrbox->setUsersObj(new \App\DB\UserModel($this->db));
          //dump( $usrbox ); die();
          return $usrbox;
+     }
+     
+     public function createComponentBreadcrumbs() {
+         return new \App\CommonModule\Components\BreadcrumbsControl();
      }
 
  }

@@ -5,7 +5,8 @@
 
     <!-- INLINE SEARCH -->
     <div class="inline-search clearfix margin-bottom-60">
-        <form action="" method="get" class="widget_search">
+        <form action="{plink Forum:search}" method="get" class="widget_search">
+            
             <input type="search" placeholder="Search Forum..." id="s" name="s" class="serch-input">
             <button type="submit">
                 <i class="fa fa-search"></i>
@@ -16,22 +17,22 @@
     <!-- SIGNED IN -->
     <h5 class="bold nomargin-bottom">
         <small class="pull-right size-14 weight-300">(signed in)</small>
-        Welcome, {}
+        Welcome, {$user['display_name']}
     </h5>
     <!-- SIDE NAV -->
     <ul class="side-nav list-group margin-bottom-80" id="sidebar-nav">
-        <li class="list-group-item active"><a href="page-profile.html"><i class="fa fa-eye"></i> PROFILE</a></li>
-        <li class="list-group-item"><a href="page-profile-comments.html"><i class="fa fa-comments-o"></i> COMMENTS</a></li>
+        <li class="list-group-item"><a href="{plink :Profile:Profile:default}"><i class="fa fa-eye"></i> PROFILE</a></li>
+        <li class="list-group-item active"><a><i class="fa fa-comments-o"></i> {$user['count_posts']} COMMENTS</a></li>
         <li class="list-group-item"><a href="page-profile-history.html"><i class="fa fa-history"></i> HISTORY</a></li>
         <li class="list-group-item"><a href="page-profile-settings.html"><i class="fa fa-gears"></i> SETTINGS</a></li>
-        <li class="list-group-item"><a href="#"><i class="fa fa-power-off"></i> LOG OUT</a></li>
+        <li class="list-group-item"><a href="{plink :Common:Sign:out}"><i class="fa fa-power-off"></i> LOG OUT</a></li>
     </ul><!-- /SIDE NAV -->
     <!-- /SIGNED IN -->
 
 </div>
 
 <!-- LEFT -->
-<div class="col-md-9 col-md-pull-3">
+<div class="col-md-9 col-md-pull-3" id="forum_top">
 
     {foreach $posts as $ket => $post }
         {var $userPost = $presenter->getUserDataForForum($post->id_user)}
@@ -50,7 +51,7 @@
                             </a>
                         </div>
                         <small class="block">admin</small>
-                        <small class="block">473 Posts</small>
+                        <small class="block">{$userPost['count_posts']} Posts</small>
                         <hr />
                         <div class="rating rating-4 size-13"><!-- rating-0 ... rating-5 --></div>
                     </div>
