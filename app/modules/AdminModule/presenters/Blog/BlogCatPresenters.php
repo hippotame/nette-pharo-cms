@@ -44,7 +44,8 @@
       * (non-PHPdoc)
       * @see \DB\AbstractDBModel;
       */
-     private function init() {
+     protected function init() {
+         parent::init();
          $this->model = new BlogCategoryModel($this->db);
      }
 

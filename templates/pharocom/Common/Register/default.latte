@@ -1,0 +1,210 @@
+{* Latte template *}
+
+{block full_content}
+
+<!-- LOGIN -->
+<div class="col-md-6 col-sm-6">
+
+    <!-- ALERT -->
+    <!--
+    <div class="alert alert-mini alert-danger margin-bottom-30">
+            <strong>Oh snap!</strong> Login Incorrect!
+    </div>
+    -->
+    <!-- /ALERT -->
+
+    <!-- register form -->
+    {form registerForm}
+        <header>
+            <i class="fa fa-users"></i> {_'Register'}
+        </header>
+
+        <fieldset class="nomargin">
+            <label class="input margin-bottom-10">
+                <i class="ico-append fa fa-user" id="ico-user-login"></i>
+                {input user_login}
+            </label>
+            <label class="input margin-bottom-10">
+                <i class="ico-append fa fa-envelope" id="ico-user-email"></i>
+                {input user_email}
+            </label>
+
+            <label class="input margin-bottom-10">
+                <i class="ico-append fa fa-lock"></i>
+                {input user_pass}
+                <strong class="tooltip tooltip-bottom-right">Only latin characters and numbers</strong>
+            </label>
+
+            <label class="input margin-bottom-10">
+                <i class="ico-append fa fa-lock"></i>
+                {input user_pass2}
+                <strong class="tooltip tooltip-bottom-right">Only latin characters and numbers</strong>
+            </label>
+
+            {*<div class="row margin-bottom-10">
+                <div class="col-md-6">
+                    <label class="input">
+                        <input type="text" placeholder="First name">
+                    </label>
+                </div>
+                <div class="col col-md-6">
+                    <label class="input">
+                        <input type="text" placeholder="Last name">
+                    </label>
+                </div>
+            </div>
+
+            <label class="select margin-bottom-10 margin-top-20">
+                <select>
+                    <option value="0" selected disabled>Gender</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Other</option>
+                </select>
+                <i></i>
+            </label>*}
+
+            <div class="margin-top-30">
+                <label class="checkbox nomargin">
+                    {input agree_to_terms}
+                    {*<input class="checked-agree" type="checkbox" name="checkbox">*}<i></i>I agree to the <a href="#" data-toggle="modal" data-target="#termsModal">Terms of Service</a></label>
+                    {*<label class="checkbox nomargin"><input type="checkbox" name="checkbox"><i></i>I want to receive news and  special offers</label>*}
+            </div>
+        </fieldset>
+
+        <div class="row margin-bottom-20">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> REGISTER</button>
+            </div>
+        </div>
+
+    {/form}
+    <!-- /register form -->
+
+</div>
+<!-- /LOGIN -->
+
+<!-- SOCIAL LOGIN -->
+<div class="col-md-6 col-sm-6">
+    <form action="#" method="post" class="sky-form boxed">
+
+        <header>
+           <i class="fa fa-facebook"></i> {_'Register using your favourite social network'}
+        </header>
+
+        <fieldset class="nomargin">
+
+            <div class="row">
+
+                <div class="col-md-8 col-md-offset-2">
+
+                    <a class="btn btn-block btn-social btn-facebook margin-bottom-10">
+                        <i class="fa fa-facebook"></i> Sign up with Facebook
+                    </a>
+
+                    <a class="btn btn-block btn-social btn-twitter margin-bottom-10">
+                        <i class="fa fa-twitter"></i> Sign up with Twitter
+                    </a>
+
+                    <a class="btn btn-block btn-social btn-google margin-bottom-10">
+                        <i class="fa fa-google-plus"></i> Sign up with Google
+                    </a>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+        <footer>
+            Already have an account? <a href="{plink :Common:Sign:in}"><strong>{_'Back to login!'}</strong></a>
+        </footer>
+
+    </form>
+
+</div>
+<!-- /SOCIAL LOGIN -->
+
+
+<!-- MODALS -->
+
+<!-- Small Modal -->
+<div class="modal fade user-login-warning" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">{_'Username allready exists'}</h4>
+            </div>
+            <div class="modal-body">
+                {_'Username'} <strong id="user_login_taken"></strong> {_'has been allready taken'}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade user-email-warning" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">{_'Useremail allready exists'}</h4>
+            </div>
+            <div class="modal-body">
+                {_'UserEmail'} <strong id="user_email_taken"></strong> {_'has been allready taken.'}
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/block}
+
+
+{block front_javascript}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var x_timer;
+        $("#frm-registerForm-user_login").keyup(function (e) {
+            clearTimeout(x_timer);
+            var user_login = $(this).val();
+            x_timer = setTimeout(function () {
+                check_username_ajax(user_login);
+            }, 1000);
+        });
+        $("#frm-registerForm-user_email").keyup(function (e) {
+            clearTimeout(x_timer);
+            var user_email = $(this).val();
+            x_timer = setTimeout(function () {
+                check_useremail_ajax(user_email);
+            }, 1000);
+        });
+
+
+        function check_username_ajax(user_login) {
+            $.post('/common/register/check-user-name/', {'user_login': user_login}, function (data) {
+                if (data == 1) {
+                    $('#ico-user-login').addClass('beredbg');
+                    $('#user_login_taken').html(user_login);
+                    $('.user-login-warning').modal().show();
+                    $("#frm-registerForm-user_login").val('');
+                } else {
+                    $('#ico-user-login').removeClass('beredbg').addClass('begreenbg');
+                }
+            });
+        }
+        function check_useremail_ajax(user_email) {
+            $.post('/common/register/check-user-email/', {'user_email': user_email}, function (data) {
+                if (data == 1) {
+                    $('#ico-user-email').addClass('beredbg');
+                    $('#user_email_taken').html(user_email);
+                    $('.user-email-warning').modal().show();
+                    $("#frm-registerForm-user_email").val('');
+                } else {
+                    $('#ico-user-email').removeClass('beredbg').addClass('begreenbg');
+                }
+            });
+        }
+    });
+</script>
+{/block}

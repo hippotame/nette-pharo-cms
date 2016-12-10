@@ -23,7 +23,14 @@
                 <li>
                     <a href="#">
                         <i class="fa fa-comment-o"></i> 
-                        <span class="font-lato">0 Comments</span>
+                        <span class="font-lato">{$presenter->getCommentCount($post->id)} {_'Comments',1}</span>
+                    </a>
+                </li>
+            {else}
+                <li>
+                    <a href="#">
+                        <i class="fa fa-comment-o"></i> 
+                        <span class="font-lato">{$presenter->getCommentCount($post->id)} {_'Comments',1}</span>
                     </a>
                 </li>
             {/if}
@@ -33,7 +40,7 @@
                 <a class="category" href="#">
                     <span class="font-lato">{$post->cat_name}</span>
                 </a>
-                
+
             </li>
             <li>
                 <a href="#">
@@ -50,7 +57,7 @@
 
         <a n:href="read , $post->id" class="btn btn-reveal btn-default">
             <i class="fa fa-plus"></i>
-            <span>Read More</span>
+            <span>{_'Read More'}</span>
         </a>
 
     </div>

@@ -3,6 +3,7 @@
  namespace App\CommonModule\Presenters;
 
  use Nette;
+ use App\Model\Translate;
 
  class CommonPresenter extends Nette\Application\UI\Presenter {
 
@@ -11,30 +12,51 @@
      private $templateName = 'pharocom';
      protected $userManager;
      protected $userData;
+     protected $id;
+
+     
+
+     /**
+      *
+      * @var array
+      */
      protected $data;
-     protected $modulesWithSlideshow = ['Forum','Profile','Common'];
 
-     ///** @persistent */
-     #public $lang;
+     /**
+      *  where show slideshow
+      *
+      * @var array
+      */
+     protected $modulesWithSlideshow = ['Forum', 'Profile', 'Common'];
 
-     /** @var \Pharo\Translator */
-     protected $translator;
+     /** @var \App\Model\Translate */
+     public $translator;
+     public $languages_list = [1];
+     public $languages_names = ['CZ'];
 
      public function __construct(Nette\Database\Context $database) {
-         parent::__construct($database);
          $this->db = $database;
      }
 
      protected function startup() {
          parent::startup();
          $this->setTemplateName();
+         $this->languages_list = $this->context->parameters['app']['languages_list'];
+         $this->languages_names = $this->context->parameters['app']['languages_names'];
+         $this->translator = new Translate($this->db, $this->session, $this->getModule());
      }
 
      protected function beforeRender() {
          parent::beforeRender();
+         $this->template->setTranslator($this->translator);
          $this->template->module = $this->getModule();
          $this->template->action = $this->getAction();
          $this->template->modulesWithSlideshow = $this->modulesWithSlideshow;
+        
+     }
+     
+     public function isBasicAuth() {
+         return $this->getUser()->isLoggedIn();
      }
 
      public function getUser() {
@@ -46,8 +68,8 @@
      public function restrictAccess($rights = 100) {
          $module = $this->getModule();
          if ($this->user->isLoggedIn() === false) {
-             $this->flashMessage(sprintf('You must sign in to see %s section', $module), 'danger');
-             $this->redirect(':Common:Sign:in');
+             $this->flashMessage($this->translator->translate(sprintf('You must sign in to see %s section', $module), 1), 'danger');
+             $this->redirect(':Common:Sign:in', $module);
          }
 
          if (isset($this->user->getIdentity()->$module) === true) {
@@ -88,6 +110,11 @@
              return false;
          }
          return substr($this->name, 0, $a);
+     }
+
+     public function getAppParameter($parameter) {
+         // @TODO check if param exists 
+         return $this->context->getParameters()['app'][$parameter];
      }
 
      /**
@@ -152,13 +179,21 @@
          $usrbox = new \App\CommonModule\Components\UsrboxControl();
          $usrbox->setDb($this->db);
          $usrbox->setUser($this->user);
+         $usrbox->setTranslator($this->translator);
          $usrbox->setUsersObj(new \App\DB\UserModel($this->db));
          //dump( $usrbox ); die();
          return $usrbox;
      }
-     
+
      public function createComponentBreadcrumbs() {
          return new \App\CommonModule\Components\BreadcrumbsControl();
+     }
+     
+     
+     public function getCurrentHost() {
+         $httpRequest = $this->context->getByType('Nette\Http\Request');
+         $uri = $httpRequest->getUrl();
+         return sprintf('%s://%s/',$uri->scheme,$uri->host);
      }
 
  }

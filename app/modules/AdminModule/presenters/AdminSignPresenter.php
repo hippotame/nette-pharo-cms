@@ -11,6 +11,7 @@
   *
   * @author hippo
   */
+ use Nette;
  use Nette\Application\UI\Form;
 
  class AdminSignPresenter extends BasePresenter {
@@ -35,11 +36,10 @@
          } else {
              $this->getUser()->setExpiration('20 minutes', TRUE);
          }
-
          try {
              $this->getUser()->login($values->user_login, $values->user_pass);
              $this->flashMessage('You have been logged in', 'info');
-             $this->redirect(':Front:Homepage:default');
+             $this->redirect(':Admin:Dashboard:default');
          } catch (Nette\Security\AuthenticationException $e) {
              $this->flashMessage($e->getMessage(),'danger');
              $this->redirect(':Admin:AdminSign:default');

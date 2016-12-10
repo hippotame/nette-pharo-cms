@@ -11,10 +11,15 @@ parameters:
     app:
         https: false
         log_level: NOTICE
+        languages_list: [1,2]
+        languages_names: ['CZ','EN']
+        #1=cz,2=en
+        mailer_def_from: 'hippo@localhost.cz'
     session:
         autoStart: true  # výchozí je smart
         expiration: 10 days
         name: pharocom
+
 doctrine:
     user: cms
     password: cms
@@ -33,7 +38,6 @@ application:
   mapping:
     *: App\*Module\Presenters\*Presenter
 
-
 session:
   expiration: 14 days
 
@@ -42,4 +46,5 @@ services:
   # system services
     entityManager: @Kdyby\Doctrine\EntityManager
     router: App\RouterFactory::createRouter
+    #datastore: App\Datastores\Datastore
     #translator: \Pharo\Translator

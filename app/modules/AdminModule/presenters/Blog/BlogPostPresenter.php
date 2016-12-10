@@ -51,6 +51,7 @@
          if ($this->model->count() < 1) {
              $this->redirect('edit');
          }
+         dump ( $this->model->load($this->lang) ); die();
          $this->datas = $this->model->load($this->lang);
      }
 

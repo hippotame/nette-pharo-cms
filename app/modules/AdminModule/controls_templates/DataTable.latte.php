@@ -26,6 +26,7 @@
                      ?>
                      <td>
                          <?php
+                         //  dump( isset( $row[$key]));
                          if (isset($row[$key])) {
 
                              $row_val = $row[$key];
@@ -46,9 +47,12 @@
                                      default:
                                          $button = 'danger';
                                  }
-                                 echo '<a href="' . $module . '?id=' . $row['id'] . '" class="btn btn-' . $button . '">' . ucfirst($head['name']) . '</a>';
+                                 echo '<a href="' . 
+                                         $module . '?id=' . $row['id'] . 
+                                         $pers_params . '" class="btn btn-' . $button . '">' . 
+                                         ucfirst($head['name']) . '</a>';
                              } else {
-                                 throw new DataTable\ExceptionDataTable("Metoda " . ucfirst($key) . " neexistuje");
+                                 //throw new DataTable\ExceptionDataTable("Metoda " . ucfirst($key) . " neexistuje");
                              }
                          }
                          ?>

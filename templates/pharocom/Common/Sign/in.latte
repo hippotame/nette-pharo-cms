@@ -4,7 +4,7 @@
 <div class="col-md-8 col-sm-8">
     {form signInForm}
         <header class="size-18 margin-bottom-20">
-            I'm a returning user
+            {_'I\'m a returning user',1}
         </header>
 
         <fieldset class="nomargin">
@@ -12,34 +12,34 @@
             <label class="input margin-bottom-10">
                 <i class="ico-append fa fa-user-secret"></i>
                 {input user_login}
-                <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                <b class="tooltip tooltip-bottom-right">{_'Needed to verify your account',1}</b>
             </label>
 
             <label class="input margin-bottom-10">
                 <i class="ico-append fa fa-lock"></i>
                 {input user_pass}
-                <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                <b class="tooltip tooltip-bottom-right">{_'Only latin characters and numbers',1}</b>
             </label>
 
             <div class="clearfix note margin-bottom-30">
-                <a class="pull-right" href="#">Forgot Password?</a>
+                <a class="pull-right" href="#">{_'Forgot Password?',1}</a>
             </div>
 
-            <label class="">
-                {input remember}<i></i>
+            <label class="weight-300">
+                 {input remember}<i></i>{_'Remeber me',1}
             </label>
 
         </fieldset>
 
         <footer>
-            <button type="submit" class="btn btn-primary noradius pull-right"><i class="fa fa-check"></i> OK, LOG IN</button>
+            <button type="submit" class="btn btn-primary noradius pull-right"><i class="fa fa-check"></i> {_'OK, LOG IN'}</button>
         </footer>
 
     {/form}
     <!-- /login form -->
 
     <footer>
-        Don't have an account yet? <a href="page-register-1.html"><strong>Click to register!</strong></a>
+        Don't have an account yet? <a href="{plink :Common:Register:}"><strong>Click to register!</strong></a>
     </footer>
 
 </div>

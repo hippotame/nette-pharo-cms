@@ -23,6 +23,7 @@
              COLUMN_NAME = 'user_login',
              COLUMN_EMAIL = 'user_email',
              COLUMN_PASSWORD_HASH = 'user_pass',
+             COLUMN_USER_STATUS = 'user_status',
              COLUMN_ROLE = 'role';
 
      /** @var Nette\Database\Context */
@@ -39,10 +40,6 @@
       */
      public function authenticate(array $credentials) {
          list($username, $password) = $credentials;
-
-
-         //dump($credentials);
-         //die();
          if (filter_var($username, FILTER_VALIDATE_EMAIL) === false) {
              $column = self::COLUMN_NAME;
          } else {
@@ -59,15 +56,15 @@
              $password = \App\Model\Security\Password::hash($arr[self::COLUMN_NAME], $password);
              if (\App\Model\Security\Password::verify($password, $arr[self::COLUMN_PASSWORD_HASH])) {
 
+                 if ($arr[self::COLUMN_USER_STATUS] < 1) {
+                     throw new Nette\Security\AuthenticationException('Your account has not been activated yet', self::NOT_APPROVED);
+                 }
+
                  unset($arr[self::COLUMN_PASSWORD_HASH]);
                  $rightsObj = new \App\Model\UserManager($this->database, $arr[self::COLUMN_ID]);
                  $rights = $rightsObj->setRights();
                  $arr = $arr + $rights;
                  $role = 'user';
-                 if ($arr['is_admin'] == '1') {
-                     $role = 'admin';
-                 }
-                 //dump($arr);die();
                  return new Nette\Security\Identity($row[self::COLUMN_ID], $role, $arr);
              } else {
                  throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);

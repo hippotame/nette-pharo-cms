@@ -16,6 +16,7 @@
      private $map;
      private $userObj;
      private $user;
+     private $translator;
 
      public function setDb(&$db) {
          $this->db = $db;
@@ -28,10 +29,15 @@
      public function setUser($user) {
          $this->user = $user;
      }
+     public function setTranslator($obj) {
+         $this->translator = $obj;
+     }
+     
 
      public function render() {
 
          $template = $this->template;
+         $template->setTranslator($this->translator);
 
          if ($this->user->isLoggedIn()) {
              $template->setFile(__TPL__ . '/pharocom/Common/components/UserLoggedComponent.latte');

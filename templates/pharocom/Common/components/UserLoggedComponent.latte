@@ -1,11 +1,11 @@
 <ul class="top-links list-inline pull-right">
-    <li class="text-welcome hidden-xs">Welcome to LosGaucos <strong>{$user['display_name']}</strong></li>
+    <li class="text-welcome hidden-xs">{_'Welcome to LosGaucos',1} <strong>{$user['display_name']}</strong></li>
     <li>
-        <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i>MY ACCOUNT</a>
+        <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i>{_'MY ACCOUNT',1}</a>
         <ul class="dropdown-menu pull-right">
-            <li><a tabindex="-1" href="{plink :Profile:Profile:default}"><i class="fa fa-cog"></i> MY SETTINGS</a></li>
+            <li><a tabindex="-1" href="{plink :Profile:Profile:default}"><i class="fa fa-cog"></i> {_'MY SETTINGS',1}</a></li>
             <li class="divider"></li>
-            <li><a tabindex="-1" href="{plink :Common:Sign:out}"><i class="glyphicon glyphicon-off"></i> LOGOUT</a></li>
+            <li><a tabindex="-1" href="{plink :Common:Sign:out}"><i class="glyphicon glyphicon-off"></i> {_'LOGOUT',1}</a></li>
         </ul>
     </li>
     

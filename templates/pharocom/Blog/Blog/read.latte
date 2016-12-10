@@ -11,7 +11,7 @@
     <li>
         <a href="#">
             <i class="fa fa-comment-o"></i> 
-            <span class="font-lato">0 Comments</span>
+            <span class="font-lato">{$commentCount} {_'Comments',1 }</span>
         </a>
     </li>
     <li>
@@ -24,7 +24,7 @@
     <li>
         <a href="#">
             <i class="fa fa-user"></i> 
-            <span class="font-lato">hippo</span>
+            <span class="font-lato">{$commentAuthor}</span>
         </a>
     </li>
 </ul>
@@ -45,9 +45,9 @@
 
 <!-- IMAGE -->
 {if $post->post_image}
-<figure class="margin-bottom-20">
+    <figure class="margin-bottom-20">
         <img class="img-responsive" src="{$post->post_image}" alt="{$post->post_title}" />
-</figure>
+    </figure>
 {/if}
 <!-- /IMAGE -->
 
@@ -226,53 +226,13 @@
 
 
 
-    <h4 class="page-header size-20 margin-bottom-60 margin-top-100">
-        LEAVE A <span>COMMENT</span>
-    </h4>
+    {if $isBasicAuth}
+        <h4 class="page-header size-20 margin-bottom-60 margin-top-100">
+            LEAVE A <span>COMMENT</span>
+        </h4>
 
-    <!-- Form -->
-    <form action="#" method="post">
-
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label>NAME</label>
-                    <input required="required" type="text" value="" maxlength="100" class="form-control input-lg" name="author" id="author">
-                </div>
-                <div class="col-md-4">
-                    <label>EMAIL</label>
-                    <input required="required" type="email" value="" maxlength="100" class="form-control input-lg" name="contact_email" id="contact_email">
-                </div>
-                <div class="col-md-4">
-                    <label>WEBSITE</label>
-                    <input type="email" value="" maxlength="100" class="form-control input-lg" name="url" id="url">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label>COMMENT</label>
-                    <textarea required="required" maxlength="5000" rows="5" class="form-control" name="comment" id="comment"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <button class="btn btn-3d btn-lg btn-reveal btn-black">
-                    <i class="fa fa-check"></i>
-                    <span>SUBMIT MESSAGE</span>
-                </button>
-
-            </div>
-        </div>
-
-    </form>
-    <!-- /Form -->
-
+        {control commentForm}
+    {/if}
 </div>
 <!-- /COMMENTS -->
 

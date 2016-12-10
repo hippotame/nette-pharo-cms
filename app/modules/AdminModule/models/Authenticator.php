@@ -1,8 +1,6 @@
 <?php
 
- use Nette;
-
- namespace App\AdminModule;
+namespace App\AdminModule;
 
  use Nette;
  use Nette\Security as NS;
@@ -33,10 +31,6 @@
       */
      public function authenticate(array $credentials) {
          list($username, $password) = $credentials;
-
-
-         //dump($credentials);
-         //die();
          if (filter_var($username, FILTER_VALIDATE_EMAIL) === false) {
              $column = self::COLUMN_NAME;
          } else {
@@ -57,12 +51,13 @@
                  }
 
                  unset($arr[self::COLUMN_PASSWORD_HASH]);
-                 $rightsObj = new \App\Model\UserManager($this->database, $arr[self::COLUMN_ID]);
+                 $rightsObj = new \App\Model\UserManager($this->db, $arr[self::COLUMN_ID]);
                  $rights = $rightsObj->setRights();
                  $arr = $arr + $rights;
-                 $role = 'admin';
-
-                 //dump($arr);die();
+                 $role = 'user';
+                 if ($arr['is_admin'] == '1') {
+                     $role = 'admin';
+                 }
                  return new NS\Identity($row[self::COLUMN_ID], $role, $arr);
              } else {
                  throw new NS\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);

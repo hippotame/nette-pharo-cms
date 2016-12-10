@@ -128,15 +128,13 @@
          }
      }
 
-     
-
      /**
       * 
       * @param \Nette\Utils\ArrayHash $data
       * @param int $lang
       */
      public function store(\Nette\Utils\ArrayHash $data, $lang = 1) {
-         if (isset($data->id) === true) {
+         if (isset($data->id) === true && is_null($data->id) === false) {
              $this->update($data, $lang);
          } else {
              $this->insert($data, $lang);

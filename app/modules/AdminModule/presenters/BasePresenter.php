@@ -14,6 +14,7 @@
      public $lang = 1;
      protected $heads = [];
      protected $datas = [];
+     protected $pers_params = '';
      protected $signin = true;
 
      public function __construct(Nette\Database\Context $database) {
@@ -34,8 +35,14 @@
                  $this->redirect(':Admin:AdminSign:default');
              }
          }
+         $this->init();
      }
 
+     
+     protected function init() {
+         
+     }
+     
      /*      * ***********************************************************
       * SECURE PART
       * Methods to authentificate ADMINS 
@@ -43,7 +50,13 @@
       */
 
      final public function isAuth() {
-         return false;
+         if (isset($this->user->getIdentity()->data) === false) {
+             return false;
+         }
+         if ($this->user->getIdentity()->data['is_admin'] < 1) {
+             return false;
+         }
+         return true;
      }
 
      /*      * ***********************************************************
@@ -52,8 +65,16 @@
       * ******************************************************************
       */
 
+     /**
+      * @see \Nette\Security\Identity
+      */
+     protected function beforeRender() {
+         parent::beforeRender();
+         $this->template->adminuser = $this->user;
+     }
+
      public function renderDefault() {
-         
+         //die('impelement me');
      }
 
      public function actionEdit($id = null) {
@@ -228,6 +249,7 @@
          $object = new DataTable();
          $object->addHeads($this->heads);
          $object->setDataSource($this->datas);
+         $object->setPers_params($this->pers_params);
          return $object;
      }
 

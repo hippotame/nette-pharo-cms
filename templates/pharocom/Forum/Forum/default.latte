@@ -2,11 +2,10 @@
 
 {block content}
 <div class="col-md-3 col-md-push-9">
-
     <!-- INLINE SEARCH -->
     <div class="inline-search clearfix margin-bottom-60">
         <form action="{plink Forum:search}" method="get" class="widget_search">
-            
+
             <input type="search" placeholder="Search Forum..." id="s" name="s" class="serch-input">
             <button type="submit">
                 <i class="fa fa-search"></i>
@@ -16,28 +15,35 @@
     <!-- /INLINE SEARCH -->
     <!-- SIGNED IN -->
     <h5 class="bold nomargin-bottom">
-        <small class="pull-right size-14 weight-300">(signed in)</small>
-        Welcome, {$user['display_name']}
+        <small class="pull-right size-14 weight-300">{_'(signed in)',1}</small>
+        {_'Welcome',1}, {$user['display_name']}
     </h5>
     <!-- SIDE NAV -->
     <ul class="side-nav list-group margin-bottom-80" id="sidebar-nav">
-        <li class="list-group-item"><a href="{plink :Profile:Profile:default}"><i class="fa fa-eye"></i> PROFILE</a></li>
-        <li class="list-group-item active"><a><i class="fa fa-comments-o"></i> {$user['count_posts']} COMMENTS</a></li>
-        <li class="list-group-item"><a href="page-profile-history.html"><i class="fa fa-history"></i> HISTORY</a></li>
-        <li class="list-group-item"><a href="page-profile-settings.html"><i class="fa fa-gears"></i> SETTINGS</a></li>
-        <li class="list-group-item"><a href="{plink :Common:Sign:out}"><i class="fa fa-power-off"></i> LOG OUT</a></li>
+        <li class="list-group-item"><a href="{plink :Profile:Profile:default}"><i class="fa fa-eye"></i> {_'PROFILE',1}</a></li>
+            {*<li class="list-group-item active"><a><i class="fa fa-comments-o"></i> {$user['count_posts']} {_'COMMENTS',1}</a></li>*}
+            {*<li class="list-group-item"><a href="page-profile-history.html"><i class="fa fa-history"></i> {_'HISTORY',1}</a></li>*}
+            {*<li class="list-group-item"><a href="page-profile-settings.html"><i class="fa fa-gears"></i> SETTINGS</a></li>*}
+        <li class="list-group-item"><a href="{plink :Common:Sign:out}"><i class="fa fa-power-off"></i> {_'LOG OUT',1}</a></li>
     </ul><!-- /SIDE NAV -->
     <!-- /SIGNED IN -->
-
 </div>
-
 <!-- LEFT -->
 <div class="col-md-9 col-md-pull-3" id="forum_top">
 
+    <!-- post -->
+    <div class="clearfix margin-bottom-60" id="replay_post">
+        <div class="border-bottom-1 border-top-1 padding-10">
+            <span class="pull-right size-11 margin-top-3 text-muted">{date('d.m.Y')}</span>
+            <strong>{_'LEAVE A REPLY'}</strong>
+        </div>
+        {control addPostForm}
+    </div>
+    <!-- /post -->
     {foreach $posts as $ket => $post }
         {var $userPost = $presenter->getUserDataForForum($post->id_user)}
         <!-- post -->
-        <div class="clearfix margin-bottom-60">
+        <div class="clearfix margin-bottom-60" id="post_ID_NUM_{$post->id}">
             <div class="border-bottom-1 border-top-1 padding-10">
                 <span class="pull-right size-11 margin-top-3 text-muted">{$post->date_release|date:'d.m. Y H:i:s'}</span>
                 <strong>{$userPost['display_name']}</strong>
@@ -46,28 +52,53 @@
                 <div class="block-review-body">
                     <div class="block-review-avatar text-center">
                         <div class="push-bit">
-                            <a href="page-profile.html">
+                            <a href="{plink :Profile:Profile:default}">
                                 <img src="{$userPost['avatar']}" width="100" alt="avatar">
                             </a>
                         </div>
-                        <small class="block">admin</small>
+                        {*<small class="block">admin</small>*}
+                        <small class="block">&nbsp;</small>
                         <small class="block">{$userPost['count_posts']} Posts</small>
                         <hr />
-                        <div class="rating rating-4 size-13"><!-- rating-0 ... rating-5 --></div>
+                        {*<div class="rating rating-4 size-13"><!-- rating-0 ... rating-5 --></div>*}
                     </div>
-                    <p>
-                        {$post->post_content|noescape}
-                    </p>
-                    <em>- {$userPost['signature']}</em>
+                    <div><p>
+                            {$post->post_content|noescape}
+                        </p></div>
+                    {if !empty($userPost['signature'])}<em>--<br> {$userPost['signature']|noescape}</em>{/if}
                 </div>
             </div>
         </div>
-        <div class="border-bottom-1 border-top-1 padding-10 text-right">
-            <span class="margin-top-3">
+        <div class="padding-10 border-bottom-2 border-top-1 text-right">
+            <span class="margin-top-1">
+
+                <a href="#post_ID_NUM_{$post->id}" class="doPlus" tabindex="{$post->id}"><i class="fa fa-thumbs-up"></i></a>
+                <span id="post_plus_{$post->id}">0</span> 
+                <a href="#post_ID_NUM_{$post->id}" class="doMinus" tabindex="{$post->id}"><i class="fa fa-thumbs-down"></i></a>
+                <span id="post_minus_{$post->id}">1</span>
+                &nbsp;&nbsp;&nbsp;
+
+                {if $user['id'] == $userPost['id']}
+
+                    <a href="{plink :Forum:Forum:default}?command=delete&amp;delete_id={$post->id}#replay_post" class="delete_post btn  btn-3d btn-xs btn-danger btn-reveal">
+                        <i class="et-tools"></i>
+                        <span>{_'Delete'}</span>
+                    </a>
+
+                    <a href="{plink :Forum:Forum:default}?command=edit&amp;edit_id={$post->id}#replay_post" class="btn  btn-3d btn-xs btn-warning btn-reveal">
+                        <i class="et-tools"></i>
+                        <span>{_'Edit'}</span>
+                    </a>
+                {/if}
                 <a href="{plink :Forum:Forum:default}?command=answer&amp;answer_id={$post->id}#replay_post" class="btn  btn-3d btn-xs btn-primary btn-reveal">
                     <i class="et-megaphone"></i>
-                    <span>Answer</span>
+                    <span>{_'Answer'}</span>
                 </a>
+                &nbsp;&nbsp;<a class="scrollTo" href="#forum_top">
+                    <i class="ico-dark ico-xs ico-hover fa fa-chevron-up"></i>
+                </a>
+
+
             </span>
         </div>
         <!-- /post -->
@@ -88,19 +119,55 @@
         </ul>
     </div>
     <!-- /pagination -->
-
-    <!-- post -->
-    <div class="clearfix margin-bottom-60" id="replay_post">
-        <div class="border-bottom-1 border-top-1 padding-10">
-            <span class="pull-right size-11 margin-top-3 text-muted">today</span>
-            <strong>LEAVE A REPLY</strong></a>
-        </div>
-        {control addPostForm}
-
-    </div>
-    <!-- /post -->
-
-
-
 </div>
+{/block}
+
+{block front_javascript}
+<script type="text/javascript">
+    $.fn.forumGetPlus = function (id_post) {
+        $('#post_plus_' + id_post).load('/forum/eval-plus/?id_post=' + id_post);
+    }
+    $.fn.forumGetMinus = function (id_post) {
+        $('#post_minus_' + id_post).load('/forum/eval-minus/?id_post' + id_post);
+    }
+
+
+
+
+    {foreach $posts as $k => $v }
+    $('#post_plus_{$v->id}').forumGetPlus({$v->id});
+    $('#post_minus_{$v->id}').forumGetMinus({$v->id});
+    {/foreach}
+
+    $(document).ready(function () {
+        $('.doPlus').click(function () {
+            var id_data = $(this).attr('tabindex');
+            var plus = $.get('/forum/do-plus/?id=' + id_data, function (data) {
+                if (data == 1) {
+                    $('#post_plus_' + id_data).forumGetPlus(id_data);
+                    return;
+                }
+                if (data == 9) {
+                    alert('{_'You have got all ready voted. Do not change your opinion.'}');
+                    return;
+                }
+                return;
+            });
+        });
+        $('.doMinus').click(function () {
+            var id_data = $(this).attr('tabindex');
+            var plus = $.get('/forum/do-minus/?id=' + id_data, function (data) {
+                if (data == 1) {
+                    $('#post_minus_' + id_data).forumGetMinus(id_data);
+                    return;
+                }
+                if (data == 9) {
+                    alert('{_'You have got all ready voted. Do not change your opinion.'}');
+                    return;
+                }
+                return;
+            });
+        });
+    });
+</script>
 {/block}

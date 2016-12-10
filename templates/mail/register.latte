@@ -1,0 +1,42 @@
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Dokončení registrace</title>
+        <style>
+            body {
+
+            }
+            .t_table {
+                border: 1px solid black;
+            }
+            .t_table td {
+                padding: 10px;
+            }
+            .strong {
+                font-weight: 900;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Dobrý den,</p>
+        <p>Použijte prosím aktivační odkaz k aktivaci Vašeho účtu</p>
+        <p>Aktivační odkaz: <a href="{$url_host}/common/register/activate/{$key}">{$key}</a></p>
+        <table border="1" class="t_table">
+            <tr>
+                <td class="strong">Uživatelské jméno</td>
+                <td>{$user_login}</td>
+            </tr>
+            <tr>
+                <td class="strong">Uživatelské heslo</td>
+                <td>Heslo, které jste si zvolil při registraci</td>
+            </tr>  
+            <tr>
+                <td class="strong">URL webu</td>
+                <td><a href="{$url_host}">{$url_host}</a></td>
+            </tr> 
+        </table>
+        <p class="strong">Co získáte registrací</p>
+        <p>todo</p>
+    </body>
+</html>

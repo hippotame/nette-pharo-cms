@@ -5,9 +5,9 @@
     <head>
         <meta charset="utf-8" />
         <title>{ifset title}{include title|striptags} | {/ifset} LOS GAUČOS </title>
-        <meta name="keywords" content="HTML5,CSS3,Template" />
+        <meta name="keywords" content="" />
         <meta name="description" content="" />
-        <meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+        <meta name="Author" content="LOS GAUCOS" />
         <!-- mobile settings -->
         <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
         {include '../@theme_scripts.latte'}
@@ -18,12 +18,8 @@
             <!-- Top Bar -->
             <div id="topBar">
                 <div class="container">
-
                     <!-- right -->
                     {control userBox}
-
-
-
                 </div>
             </div>
             <!-- /Top Bar -->
@@ -58,8 +54,8 @@
             <section class="page-header dark page-header-xs shadow-after-1">
                 <div class="container">
 
-                    <h1>Glosy (nejen) o hokeji </h1>
-                        
+                    <h1>{_'Glosy (nejen) o hokeji',1}</h1>
+
                     <!-- breadcrumbs -->
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
@@ -71,24 +67,23 @@
             </section>
             <!-- /PAGE HEADER -->
             {if !in_array($module,$modulesWithSlideshow)}
-            <!-- HOME -->
-            <section id="home" class="height-450" style="background:url('/themes/_data/img/cropped-ice-hockey.jpg')">
-                <div class="display-table">
-                    <div class="display-table-cell vertical-align-middle">
-                        <div class="container text-center">
-                            <h1 class="nomargin size-50 weight-300 wow fadeInUp" data-wow-delay="0.4s">Los Gaučos - fandíme v sedě</h1>
-                            <p class="lead font-lato size-30 wow fadeInUp" data-wow-delay="0.7s">Glosy (nejen) o hokeji</p>
-                        </div>
+                <!-- HOME -->
+                <section id="home" class="height-450" style="background:url('/themes/_data/img/cropped-ice-hockey.jpg')">
+                    <div class="display-table">
+                        <div class="display-table-cell vertical-align-middle">
+                            <div class="container text-center slider-featured-text">
+                                <h1 class="text-white nomargin size-50 weight-300 wow fadeInUp animated bold" data-wow-delay="0.4s">{_'Los Gaučos - fandíme v sedě',1}</h1>
+                                <p class="text-white lead font-lato size-30 wow fadeInUp animated bold" data-wow-delay="0.7s">{_'Glosy (nejen) o hokeji',1}</p>
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-            </section>
-            <!-- /HOME -->
+                </section>
+                <!-- /HOME -->
             {/if}
             <!-- -->
             <section>
                 <div class="container">
-
                     <div class="row">
                         {snippet flashes}
                             <div n:foreach="$flashes as $flash" 
@@ -103,174 +98,51 @@
                         {include full_content}
 
                     </div>
-
-
                 </div>
             </section>
             <!-- / -->
-
-
-
-
             <!-- FOOTER -->
             <footer id="footer">
                 <div class="container">
-
                     <div class="row">
-
-                        <div class="col-md-3">
-                            <!-- Footer Logo -->
-                            <img class="footer-logo" src={$baseThemePath}assets/images/logo-footer.png" alt="" />
-
-                            <!-- Small Description -->
-                            <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-
-                            <!-- Contact Address -->
-                            <address>
-                                <ul class="list-unstyled">
-                                    <li class="footer-sprite address">
-                                        PO Box 21132<br>
-                                        Here Weare St, Melbourne<br>
-                                        Vivas 2355 Australia<br>
-                                    </li>
-                                    <li class="footer-sprite phone">
-                                        Phone: 1-800-565-2390
-                                    </li>
-                                    <li class="footer-sprite email">
-                                        <a href="mailto:support@yourname.com">support@yourname.com</a>
-                                    </li>
-                                </ul>
-                            </address>
-                            <!-- /Contact Address -->
-
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <!-- Latest Blog Post -->
-                            <h4 class="letter-spacing-1">LATEST NEWS</h4>
-                            <ul class="footer-posts list-unstyled">
-                                <li>
-                                    <a href="#">Donec sed odio dui. Nulla vitae elit libero, a pharetra augue</a>
-                                    <small>29 June 2015</small>
-                                </li>
-                                <li>
-                                    <a href="#">Nullam id dolor id nibh ultricies</a>
-                                    <small>29 June 2015</small>
-                                </li>
-                                <li>
-                                    <a href="#">Duis mollis, est non commodo luctus</a>
-                                    <small>29 June 2015</small>
-                                </li>
-                            </ul>
-                            <!-- /Latest Blog Post -->
-
-                        </div>
-
-                        <div class="col-md-2">
-
-                            <!-- Links -->
-                            <h4 class="letter-spacing-1">EXPLORE SMARTY</h4>
-                            <ul class="footer-links list-unstyled">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Our Services</a></li>
-                                <li><a href="#">Our Clients</a></li>
-                                <li><a href="#">Our Pricing</a></li>
-                                <li><a href="#">Smarty Tour</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                            </ul>
-                            <!-- /Links -->
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <!-- Newsletter Form -->
-                            <h4 class="letter-spacing-1">KEEP IN TOUCH</h4>
-                            <p>Subscribe to Our Newsletter to get Important News &amp; Offers</p>
-
-                            <form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-success" type="submit">Subscribe</button>
-                                    </span>
-                                </div>
-                            </form>
-                            <!-- /Newsletter Form -->
-
-                            <!-- Social Icons -->
-                            <div class="margin-top-20">
-                                <a href="#" class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook">
-
-                                    <i class="icon-facebook"></i>
-                                    <i class="icon-facebook"></i>
-                                </a>
-
-                                <a href="#" class="social-icon social-icon-border social-twitter pull-left" data-toggle="tooltip" data-placement="top" title="Twitter">
-                                    <i class="icon-twitter"></i>
-                                    <i class="icon-twitter"></i>
-                                </a>
-
-                                <a href="#" class="social-icon social-icon-border social-gplus pull-left" data-toggle="tooltip" data-placement="top" title="Google plus">
-                                    <i class="icon-gplus"></i>
-                                    <i class="icon-gplus"></i>
-                                </a>
-
-                                <a href="#" class="social-icon social-icon-border social-linkedin pull-left" data-toggle="tooltip" data-placement="top" title="Linkedin">
-                                    <i class="icon-linkedin"></i>
-                                    <i class="icon-linkedin"></i>
-                                </a>
-
-                                <a href="#" class="social-icon social-icon-border social-rss pull-left" data-toggle="tooltip" data-placement="top" title="Rss">
-                                    <i class="icon-rss"></i>
-                                    <i class="icon-rss"></i>
-                                </a>
-                            </div>
-                            <!-- /Social Icons -->
-                        </div>
-
                     </div>
-
                 </div>
-
                 <div class="copyright">
                     <div class="container">
-                        <ul class="pull-right nomargin list-inline mobile-block">
+                        {*<ul class="pull-right nomargin list-inline mobile-block">
                             <li><a href="#">Terms &amp; Conditions</a></li>
                             <li>&bull;</li>
                             <li><a href="#">Privacy</a></li>
-                        </ul>
-                        &copy; All Rights Reserved, Company LTD
+                        </ul>*}
+                        &copy; All Rights Reserved, <a href="http://www.pharocom.com" class="newtab">pharoCom s.r.o</a>
                     </div>
                 </div>
             </footer>
             <!-- /FOOTER -->
-
         </div>
         <!-- /wrapper -->
-
-
-        <!-- SCROLL TO TOP -->
         <a href="#" id="toTop"></a>
-
-
-        <!-- PRELOADER -->
         <div id="preloader">
             <div class="inner">
                 <span class="loader"></span>
             </div>
-        </div><!-- /PRELOADER -->
-
-
-        <!-- JAVASCRIPT FILES -->
+        </div>
         <script type="text/javascript">var plugin_path = '<?php echo $baseThemePath;?>/assets/plugins/';</script>
         <script type="text/javascript" src="{$baseThemePath}assets/plugins/jquery/jquery-2.1.4.min.js"></script>
-
         <script type="text/javascript" src="{$baseThemePath}assets/js/scripts.js"></script>
-
-
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.delete_post').on('click', function () {
+                    return confirm({_'Really delete? Are you sure?'});
+                });
+            });
+        </script>
+        {block front_javascript}
+        
+        
+        {/block}
+        
+        
+        
     </body>
 </html>

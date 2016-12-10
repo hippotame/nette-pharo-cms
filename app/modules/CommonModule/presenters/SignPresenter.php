@@ -6,6 +6,8 @@
 
  namespace App\CommonModule\Presenters;
 
+ use Nette;
+
  /**
   * Description of SignPresenter
   *
@@ -13,29 +15,32 @@
   */
  class SignPresenter extends CommonPresenter {
 
+     protected $retURL = '';
+
      public function renderDefault() {
          $this->redirect('in');
      }
 
-     public function renderIn() {
-         
+     public function renderIn($module = null) {
+         $this->retURL = $module;
      }
 
      protected function createComponentSignInForm() {
          $form = new \Nette\Application\UI\Form();
+         $form->setTranslator($this->translator);
          $form->elementPrototype->addAttributes(['class' => 'sky-form boxed']);
          $form->addText('user_login', 'E-mail / login)')
                  ->setAttribute('placeholder', 'User name or Email')
-                 ->setRequired('Uveďte svůj registrovaný login.');
+                 ->setRequired('Use your registered user name or login.');
 
-         $form->addPassword('user_pass', 'Heslo')
+         $form->addPassword('user_pass', 'Password')
                  ->setAttribute('placeholder', 'Password')
-                 ->setRequired('Zadejte heslo.');
+                 ->setRequired('Fill up your password');
 
-         $remember = new \Nette\Forms\Controls\PharoCheckbox('Pamatuj si mne');
+         $remember = new \Nette\Forms\Controls\PharoCheckbox('Remeber me');
          $form->addComponent($remember, 'remember');
          $form->setRenderer(new \Tomaj\Form\Renderer\BootstrapVerticalRenderer);
-         $form->addSubmit('send', 'Přihlásit se');
+         $form->addSubmit('send', 'OK LOG IN');
 
          // call method signInFormSucceeded() on success
          $form->onSuccess[] = $this->signInFormSucceeded;
@@ -47,7 +52,7 @@
 
      public function signInFormSucceeded($form) {
          $values = $form->getValues();
-
+         $form->setTranslator($this->translator);
          if ($values->remember) {
              $this->getUser()->setExpiration('7 days', FALSE);
          } else {
@@ -57,8 +62,12 @@
          try {
              $this->getUser()->login($values->user_login, $values->user_pass);
              $this->flashMessage('You have been logged in', 'info');
+             if (is_null($this->getParameter('module')) === false || empty($this->getParameter('module')) === false) {
+                 $this->redirect(':' . $this->getParameter('module') . ':' . $this->getParameter('module') . ':default');
+             }
              $this->redirect(':Front:Homepage:default');
          } catch (Nette\Security\AuthenticationException $e) {
+             $this->flashMessage($this->translator->translate($e->getMessage(), 1), 'info');
              $form->addError($e->getMessage());
          }
      }
@@ -68,7 +77,7 @@
              $this->redirect(':Common:Sign:in');
          }
          $this->user->logout(1);
-         $this->flashMessage('You have been logged out', 'info');
+         $this->flashMessage($this->translator->translate('You have been logged out'), 'info');
          $this->redirect(':Common:Sign:in');
      }
 
