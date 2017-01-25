@@ -17,6 +17,16 @@
         <li>
             <a n:href="Adminer:default"><i class="fa fa-database"></i> ADMINER</a>
         </li>
+        <li class="{$presenter->getActive('page') ? 'active'}">
+            <a href="#">
+                <i class="fa fa-menu-arrow pull-right"></i>
+                <i class="main-icon fa fa-file-o"></i> <span>PAGES</span>
+            </a>
+            <ul><!-- submenus -->
+                <li><a n:href=":Admin:PageCat:default"><i class="fa fa-list" aria-hidden="true"></i> Categories </a></li>
+                <li><a n:href=":Admin:PagePost:default"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Posty </a></li>
+            </ul>
+        </li>
         <li class="{$presenter->getActive('users') ? 'active'}">
             <a href="#">
                 <i class="fa fa-menu-arrow pull-right"></i>
@@ -30,7 +40,7 @@
         <li class="{$presenter->getActive('blog') ? 'active'}">
             <a href="#">
                 <i class="fa fa-menu-arrow pull-right"></i>
-                <i class="main-icon fa fa-bar-chart-o"></i> <span>BLOG</span>
+                <i class="main-icon fa fa-rss-square"></i> <span>BLOG</span>
             </a>
             <ul><!-- submenus -->
                 <li><a n:href=":Admin:BlogCat:default"><i class="fa fa-list" aria-hidden="true"></i> Categories </a></li>
@@ -40,7 +50,7 @@
         <li class="{$presenter->getActive('forum') ? 'active'}">
             <a href="#">
                 <i class="fa fa-menu-arrow pull-right"></i>
-                <i class="main-icon fa fa-bar-chart-o"></i> <span>Forum</span>
+                <i class="main-icon fa fa-comments-o"></i> <span>Forum</span>
             </a>
             <ul><!-- submenus -->
                 <li><a n:href=":Admin:Forum:default"><i class="fa fa-list" aria-hidden="true"></i> Forum Dashboard </a></li>
@@ -50,7 +60,7 @@
         <li class="{$presenter->getActive('ads') ? 'active'}">
             <a href="#">
                 <i class="fa fa-menu-arrow pull-right"></i>
-                <i class="main-icon fa fa-bar-chart-o"></i> <span>ADS</span>
+                <i class="main-icon fa fa-umbrella"></i> <span>ADS</span>
             </a>
             <ul><!-- submenus -->
                 <li><a n:href=":Admin:Ads:default"><i class="fa fa-list" aria-hidden="true"></i> Ads </a></li>

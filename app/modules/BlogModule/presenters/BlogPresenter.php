@@ -13,6 +13,8 @@
      protected $model;
      protected $catModel;
      protected $commentsModel;
+     
+     protected $cat = null;
 
      public function startup() {
          parent::startup();
@@ -20,10 +22,14 @@
          $this->catModel = new BlogCategoryModel($this->db);
          $this->commentsModel = new BlogCommentsModel($this->db);
      }
+     
+     public function actionDefault($id){
+         $this->cat = $id;
+     }
 
      public function renderDefault() {
 
-         $data = $this->model->loadFront(1, 1, 10);
+         $data = $this->model->loadFront(1, 1, 10, $this->cat);
          $this->template->posts = $data;
      }
 

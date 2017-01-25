@@ -43,7 +43,7 @@
              if( $row->id == 1 ) {
                  continue;
              }
-             
+             $d['id'] = $row->id;
              $d['count'] =  $postModel->countIn($row->id);
              $d['name'] = $row->name;
              $tpl_data[] = $d;

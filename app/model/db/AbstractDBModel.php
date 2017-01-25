@@ -20,6 +20,12 @@
 
      /**
       *
+      * @var type 
+      */
+     protected $ordering;
+
+     /**
+      *
       * @var array
       */
      protected $txts;
@@ -158,10 +164,10 @@
                      $txt_updates->$key = null;
                  }
              }
-             //dump($txt_updates); //die();
+             //dump($txt_updates); die();
              forEach ($txt_updates as $key => $val) {
                  $id_name = str_replace('_txt', '', $key);
-                 $data->$key = $this->saveTxt($data->$key, $lang, null);
+                 $data->$key = $this->saveTxt($data->$id_name, $lang, null);
                  unset($data->$id_name);
              }
              $this->setDefaultOrdering($data);
@@ -181,7 +187,7 @@
       * @throws Exception
       */
      protected function update(\Nette\Utils\ArrayHash $data, $lang) {
-         try {
+         //try {
              $txt_updates = new \stdClass();
              forEach ($data as $key => $val) {
 
@@ -191,22 +197,23 @@
              }
              forEach ($txt_updates as $key => $val) {
                  $id_name = str_replace('_txt', '', $key);
-                 $data->$key = $this->saveTxt($val, $lang, $data->$id_name);
+                 //dump( $id_name ); die();
+                 $data->$key = $this->saveTxt($data->$id_name, $lang, $val);
                  unset($data->$id_name);
              }
              $this->getSelection()->where('id', $data->id)->update($data);
              return $data->id;
-         } catch (Exception $e) {
-             throw new \DBExc\DBException('There is error to update DB' . $e->getMessage());
-         }
+         //} catch (Exception $e) {
+         //    throw new \DBExc\DBException('There is error to update DB' . $e->getMessage());
+        // }
      }
 
      /**
-      * 
+      * Function gets max new ordering from rowset
       * @param \Nette\Utils\ArrayHash $data
       */
      protected function setDefaultOrdering(&$data) {
-         
+         $data->ordering = $this->getSelection()->max('ordering +1');
      }
 
      /**

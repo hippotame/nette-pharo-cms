@@ -48,7 +48,7 @@
                                          $button = 'danger';
                                  }
                                  echo '<a href="' . 
-                                         $module . '?id=' . $row['id'] . 
+                                         $module . '/' . $row['id'] . '/' . 
                                          $pers_params . '" class="btn btn-' . $button . '">' . 
                                          ucfirst($head['name']) . '</a>';
                              } else {

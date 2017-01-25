@@ -50,6 +50,9 @@
          $where = ' WHERE a.post_status=\'publish\' ';
          $where .= ' AND a.date_deleted IS NULL ';
          $where .= ' AND a.date_release < \'' . $now->format('Y-m-d H:i:s') . '\'  ';
+         if (is_null($blog_category) === false ) {
+             $where .= ' AND a.id_blog_category='.(int) $blog_category.' ';
+         }
 
          $order = ' ORDER BY a.date_release DESC ' ;
 

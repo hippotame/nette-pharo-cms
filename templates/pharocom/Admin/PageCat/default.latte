@@ -1,0 +1,49 @@
+{block content}
+
+
+<!-- page title -->
+<header id="page-header">
+    <h1>Page Categories - menu</h1> <a n:href="edit" class="btn btn-warning pharo-admin-new">New Cat</a>
+</header>
+<!-- /page title -->
+<div id="content" class="padding-20">
+    <div class="row">
+        <div class="col-lg-10 col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="elipsis"><!-- panel title -->
+                        <strong>All Categories</strong>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    {control dataTable}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="elipsis"><!-- panel title -->
+                        <strong>HELP</strong>
+                    </span>
+                    <ul class="options pull-right list-inline">
+                        <li><a href="#" class="opt panel_colapse" data-toggle="tooltip" title="Colapse" data-placement="bottom"></a></li>
+                        <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title="Fullscreen" data-placement="bottom"><i class="fa fa-expand"></i></a></li>
+                        <li><a href="#" class="opt panel_close" data-confirm-title="Confirm" data-confirm-message="Are you sure you want to remove this panel?" data-toggle="tooltip" title="Close" data-placement="bottom"><i class="fa fa-times"></i></a></li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    help content
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{/block}
+
+
+

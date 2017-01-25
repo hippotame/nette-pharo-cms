@@ -1,5 +1,5 @@
 <ul class="list-group list-group-bordered list-group-noicon uppercase">
     {foreach $tpl_data as $key => $row}
-        <li class="list-group-item"><a href="#"><span class="size-11 text-muted pull-right">({$row['count']})</span> {$row['name']|upper}</a></li>
+        <li class="list-group-item"><a href="{plink default, $row['id']}/"><span class="size-11 text-muted pull-right">({$row['count']})</span> {$row['name']|upper}</a></li>
     {/foreach}
 </ul>

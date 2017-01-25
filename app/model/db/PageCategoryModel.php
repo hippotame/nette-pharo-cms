@@ -4,7 +4,7 @@
 
  use Nette;
 
- class BlogCategoryModel extends AbstractDBModel {
+ class PageCategoryModel extends AbstractDBModel {
 
      /**
       *
@@ -18,21 +18,15 @@
       */
      protected $name_txt;
 
-
+     
 
      /**
       *
       * @var type 
       */
-     protected $table = 'blog_category';
+     protected $table = 'page_category';
 
-     /**
-      * Function gets max new ordering from rowset
-      * @param \Nette\Utils\ArrayHash $data
-      */
-     protected function setDefaultOrdering(&$data) {
-         $data->ordering = $this->getSelection()->max('ordering +1');
-     }
+     
 
      /**
       * 
